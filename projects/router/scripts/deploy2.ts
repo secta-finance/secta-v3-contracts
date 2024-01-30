@@ -33,12 +33,9 @@ async function main() {
     },
   })
   const smartRouter = await SmartRouter.deploy(
-    config.v2Factory,
     pancakeV3PoolDeployer_address,
     pancakeV3Factory_address,
     positionManager_address,
-    config.stableFactory,
-    config.stableInfo,
     config.WNATIVE
   )
   console.log('SmartRouter deployed to:', smartRouter.address)
@@ -53,29 +50,6 @@ async function main() {
   //   config.WNATIVE,
   // ])
 
-  /** MixedRouteQuoterV1 */
-  const MixedRouteQuoterV1 = await ethers.getContractFactory('MixedRouteQuoterV1', {
-    libraries: {
-      SmartRouterHelper: smartRouterHelper.address,
-    },
-  })
-  const mixedRouteQuoterV1 = await MixedRouteQuoterV1.deploy(
-    pancakeV3PoolDeployer_address,
-    pancakeV3Factory_address,
-    config.v2Factory,
-    config.stableFactory,
-    config.WNATIVE
-  )
-  console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1.address)
-
-  // await tryVerify(mixedRouteQuoterV1, [
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
-  //   config.v2Factory,
-  //   config.stableFactory,
-  //   config.WNATIVE,
-  // ])
-
   /** QuoterV2 */
   const QuoterV2 = await ethers.getContractFactory('QuoterV2', {
     libraries: {
@@ -87,23 +61,10 @@ async function main() {
 
   // await tryVerify(quoterV2, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
 
-  /** TokenValidator */
-  const TokenValidator = await ethers.getContractFactory('TokenValidator', {
-    libraries: {
-      SmartRouterHelper: smartRouterHelper.address,
-    },
-  })
-  const tokenValidator = await TokenValidator.deploy(config.v2Factory, positionManager_address)
-  console.log('TokenValidator deployed to:', tokenValidator.address)
-
-  // await tryVerify(tokenValidator, [config.v2Factory, positionManager_address])
-
   const contracts = {
     SmartRouter: smartRouter.address,
     SmartRouterHelper: smartRouterHelper.address,
-    MixedRouteQuoterV1: mixedRouteQuoterV1.address,
     QuoterV2: quoterV2.address,
-    TokenValidator: tokenValidator.address,
   }
 
   writeFileSync(`./deployments/${network.name}.json`, JSON.stringify(contracts, null, 2))

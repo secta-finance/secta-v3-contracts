@@ -34,11 +34,8 @@ async function main() {
     });
 
     const smartRouter = await SmartRouter.deploy(
-        config.factoryV2[networkName],
         config.factoryV3[networkName],
         config.positionManager[networkName],
-        config.stableFactory[networkName],
-        config.stableInfo[networkName],
         config.WETH[networkName],
     );
 

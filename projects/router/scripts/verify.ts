@@ -31,31 +31,12 @@ async function main() {
   ])
   await sleep(10000)
 
-  // Verify mixedRouteQuoterV1
-  console.log('Verify mixedRouteQuoterV1')
-  await verifyContract(deployedContracts_smart_router.MixedRouteQuoterV1, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
-    config.v2Factory,
-    config.stableFactory,
-    config.WNATIVE,
-  ])
-  await sleep(10000)
-
   // Verify quoterV2
   console.log('Verify quoterV2')
   await verifyContract(deployedContracts_smart_router.QuoterV2, [
     deployedContracts_v3_core.PancakeV3PoolDeployer,
     deployedContracts_v3_core.PancakeV3Factory,
     config.WNATIVE,
-  ])
-  await sleep(10000)
-
-  // Verify tokenValidator
-  console.log('Verify tokenValidator')
-  await verifyContract(deployedContracts_smart_router.TokenValidator, [
-    config.v2Factory,
-    deployedContracts_v3_periphery.NonfungiblePositionManager,
   ])
   await sleep(10000)
 }
