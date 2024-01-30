@@ -8,10 +8,10 @@
 function getSwapResult(address pool, bool zeroForOne, int256 amountSpecified, uint160 sqrtPriceLimitX96) external returns (int256 amount0Delta, int256 amount1Delta, uint160 nextSqrtRatio)
 ```
 
-### pancakeV3SwapCallback
+### sectaDexSwapCallback
 
 ```solidity
-function pancakeV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) external
+function sectaDexSwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) external
 ```
 
 Called to `msg.sender` after executing a swap via IPancakeV3Pool#swap.

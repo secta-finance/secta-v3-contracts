@@ -35,7 +35,7 @@ contract Quoter is IQuoter, IPancakeV3SwapCallback, PeripheryImmutableState {
     }
 
     /// @inheritdoc IPancakeV3SwapCallback
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes memory path

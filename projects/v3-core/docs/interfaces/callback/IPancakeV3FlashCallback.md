@@ -4,10 +4,10 @@
 
 Any contract that calls IPancakeV3PoolActions#flash must implement this interface
 
-### pancakeV3FlashCallback
+### sectaDexFlashCallback
 
 ```solidity
-function pancakeV3FlashCallback(uint256 fee0, uint256 fee1, bytes data) external
+function sectaDexFlashCallback(uint256 fee0, uint256 fee1, bytes data) external
 ```
 
 Called to `msg.sender` after transferring to the recipient from IPancakeV3Pool#flash.

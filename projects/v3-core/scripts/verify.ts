@@ -10,8 +10,8 @@ async function main() {
   await verifyContract(deployedContracts.PancakeV3PoolDeployer)
   await sleep(10000)
 
-  // Verify pancakeV3Factory
-  console.log('Verify pancakeV3Factory')
+  // Verify sectaDexFactory
+  console.log('Verify sectaDexFactory')
   await verifyContract(deployedContracts.PancakeV3Factory, [deployedContracts.PancakeV3PoolDeployer])
   await sleep(10000)
 }

@@ -14,8 +14,8 @@ async function main() {
   const v3DeployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
   const v3PeripheryDeployedContracts = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
 
-  const pancakeV3PoolDeployer_address = v3DeployedContracts.PancakeV3PoolDeployer
-  const pancakeV3Factory_address = v3DeployedContracts.PancakeV3Factory
+  const sectaDexPoolDeployer_address = v3DeployedContracts.PancakeV3PoolDeployer
+  const sectaDexFactory_address = v3DeployedContracts.PancakeV3Factory
   const positionManager_address = v3PeripheryDeployedContracts.NonfungiblePositionManager
 
   /** SmartRouterHelper */
@@ -33,8 +33,8 @@ async function main() {
     },
   })
   const smartRouter = await SmartRouter.deploy(
-    pancakeV3PoolDeployer_address,
-    pancakeV3Factory_address,
+    sectaDexPoolDeployer_address,
+    sectaDexFactory_address,
     positionManager_address,
     config.WNATIVE
   )
@@ -42,8 +42,8 @@ async function main() {
 
   // await tryVerify(smartRouter, [
   //   config.v2Factory,
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
+  //   sectaDexPoolDeployer_address,
+  //   sectaDexFactory_address,
   //   positionManager_address,
   //   config.stableFactory,
   //   config.stableInfo,
@@ -56,10 +56,10 @@ async function main() {
       SmartRouterHelper: smartRouterHelper.address,
     },
   })
-  const quoterV2 = await QuoterV2.deploy(pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE)
+  const quoterV2 = await QuoterV2.deploy(sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE)
   console.log('QuoterV2 deployed to:', quoterV2.address)
 
-  // await tryVerify(quoterV2, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
+  // await tryVerify(quoterV2, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
 
   const contracts = {
     SmartRouter: smartRouter.address,

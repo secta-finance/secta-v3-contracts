@@ -44,7 +44,7 @@ contract PairFlash is IPancakeV3FlashCallback, PeripheryPayments {
     /// @param data The data needed in the callback passed as FlashCallbackData from `initFlash`
     /// @notice implements the callback called from flash
     /// @dev fails if the flash is not profitable, meaning the amountOut from the flash is less than the amount borrowed
-    function pancakeV3FlashCallback(
+    function sectaDexFlashCallback(
         uint256 fee0,
         uint256 fee1,
         bytes calldata data

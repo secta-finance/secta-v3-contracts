@@ -22,7 +22,7 @@ abstract contract LiquidityManagement is IPancakeV3MintCallback, PeripheryImmuta
     }
 
     /// @inheritdoc IPancakeV3MintCallback
-    function pancakeV3MintCallback(
+    function sectaDexMintCallback(
         uint256 amount0Owed,
         uint256 amount1Owed,
         bytes calldata data

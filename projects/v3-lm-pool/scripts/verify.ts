@@ -12,8 +12,8 @@ async function main() {
   const deployedContracts_masterchef_v3 = await import(`@sectafi/masterchef-v3/deployments/${networkName}.json`)
   const deployedContracts_v3_lm_pool = await import(`@sectafi/v3-lm-pool/deployments/${networkName}.json`)
 
-  // Verify pancakeV3LmPoolDeployer
-  console.log('Verify pancakeV3LmPoolDeployer')
+  // Verify sectaDexLmPoolDeployer
+  console.log('Verify sectaDexLmPoolDeployer')
   await verifyContract(deployedContracts_v3_lm_pool.PancakeV3LmPoolDeployer, [
     deployedContracts_masterchef_v3.MasterChefV3,
   ])

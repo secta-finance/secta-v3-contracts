@@ -514,7 +514,7 @@ function swap(address recipient, bool zeroForOne, int256 amountSpecified, uint16
 
 Swap token0 for token1, or token1 for token0
 
-_The caller of this method receives a callback in the form of IPancakeV3SwapCallback#pancakeV3SwapCallback_
+_The caller of this method receives a callback in the form of IPancakeV3SwapCallback#sectaDexSwapCallback_
 
 #### Parameters
 
@@ -541,7 +541,7 @@ function flash(address recipient, uint256 amount0, uint256 amount1, bytes data) 
 
 Receive token0 and/or token1 and pay it back, plus a fee, in the callback
 
-_The caller of this method receives a callback in the form of IPancakeV3FlashCallback#pancakeV3FlashCallback
+_The caller of this method receives a callback in the form of IPancakeV3FlashCallback#sectaDexFlashCallback
 Can be used to donate underlying tokens pro-rata to currently in-range liquidity providers by calling
 with 0 amount{0,1} and sending the donation amount(s) from the callback_
 

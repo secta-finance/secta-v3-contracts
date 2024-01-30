@@ -13,10 +13,10 @@ struct MintCallbackData {
 }
 ```
 
-### pancakeV3MintCallback
+### sectaDexMintCallback
 
 ```solidity
-function pancakeV3MintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes data) external
+function sectaDexMintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes data) external
 ```
 
 Called to `msg.sender` after minting liquidity to a position from IPancakeV3Pool#mint.

@@ -45,7 +45,7 @@ contract TestSectaFiCallee is IPancakeV3SwapCallback {
         IPancakeV3Pool(pool).swap(recipient, false, -amount0Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata data

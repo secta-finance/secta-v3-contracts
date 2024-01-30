@@ -63,13 +63,13 @@ async function main() {
 
   const deployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
 
-  const pancakeV3PoolDeployer_address = deployedContracts.PancakeV3PoolDeployer
-  const pancakeV3Factory_address = deployedContracts.PancakeV3Factory
+  const sectaDexPoolDeployer_address = deployedContracts.PancakeV3PoolDeployer
+  const sectaDexFactory_address = deployedContracts.PancakeV3Factory
 
   const SwapRouter = new ContractFactory(artifacts.SwapRouter.abi, artifacts.SwapRouter.bytecode, owner)
-  const swapRouter = await SwapRouter.deploy(pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE)
+  const swapRouter = await SwapRouter.deploy(sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE)
 
-  // await tryVerify(swapRouter, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
+  // await tryVerify(swapRouter, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
   console.log('swapRouter', swapRouter.address)
 
   // const NFTDescriptor = new ContractFactory(artifacts.NFTDescriptor.abi, artifacts.NFTDescriptor.bytecode, owner)
@@ -140,15 +140,15 @@ async function main() {
     owner
   )
   const nonfungiblePositionManager = await NonfungiblePositionManager.deploy(
-    pancakeV3PoolDeployer_address,
-    pancakeV3Factory_address,
+    sectaDexPoolDeployer_address,
+    sectaDexFactory_address,
     config.WNATIVE,
     nonfungibleTokenPositionDescriptor.address
   )
 
   // await tryVerify(nonfungiblePositionManager, [
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
+  //   sectaDexPoolDeployer_address,
+  //   sectaDexFactory_address,
   //   config.WNATIVE,
   //   nonfungibleTokenPositionDescriptor.address,
   // ])
@@ -172,10 +172,10 @@ async function main() {
   // await tryVerify(tickLens)
 
   const QuoterV2 = new ContractFactory(artifacts.QuoterV2.abi, artifacts.QuoterV2.bytecode, owner)
-  const quoterV2 = await QuoterV2.deploy(pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE)
+  const quoterV2 = await QuoterV2.deploy(sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE)
   console.log('QuoterV2', quoterV2.address)
 
-  // await tryVerify(quoterV2, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
+  // await tryVerify(quoterV2, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
 
   const contracts = {
     SwapRouter: swapRouter.address,

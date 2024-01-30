@@ -34,7 +34,7 @@ contract PancakeV3PoolSwapTest is IPancakeV3SwapCallback {
         (nextSqrtRatio, , , , , , ) = IPancakeV3Pool(pool).slot0();
     }
 
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata data

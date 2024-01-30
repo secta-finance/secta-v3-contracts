@@ -29,10 +29,10 @@ struct FlashCallbackData {
 }
 ```
 
-### pancakeV3FlashCallback
+### sectaDexFlashCallback
 
 ```solidity
-function pancakeV3FlashCallback(uint256 fee0, uint256 fee1, bytes data) external
+function sectaDexFlashCallback(uint256 fee0, uint256 fee1, bytes data) external
 ```
 
 implements the callback called from flash

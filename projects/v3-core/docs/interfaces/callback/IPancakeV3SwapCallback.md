@@ -4,10 +4,10 @@
 
 Any contract that calls IPancakeV3PoolActions#swap must implement this interface
 
-### pancakeV3SwapCallback
+### sectaDexSwapCallback
 
 ```solidity
-function pancakeV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) external
+function sectaDexSwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) external
 ```
 
 Called to `msg.sender` after executing a swap via IPancakeV3Pool#swap.

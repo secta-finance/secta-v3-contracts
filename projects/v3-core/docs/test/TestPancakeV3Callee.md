@@ -44,10 +44,10 @@ function swapToHigherSqrtPrice(address pool, uint160 sqrtPriceX96, address recip
 event SwapCallback(int256 amount0Delta, int256 amount1Delta)
 ```
 
-### pancakeV3SwapCallback
+### sectaDexSwapCallback
 
 ```solidity
-function pancakeV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) external
+function sectaDexSwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) external
 ```
 
 Called to `msg.sender` after executing a swap via IPancakeV3Pool#swap.
@@ -76,10 +76,10 @@ function mint(address pool, address recipient, int24 tickLower, int24 tickUpper,
 event MintCallback(uint256 amount0Owed, uint256 amount1Owed)
 ```
 
-### pancakeV3MintCallback
+### sectaDexMintCallback
 
 ```solidity
-function pancakeV3MintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes data) external
+function sectaDexMintCallback(uint256 amount0Owed, uint256 amount1Owed, bytes data) external
 ```
 
 Called to `msg.sender` after minting liquidity to a position from IPancakeV3Pool#mint.
@@ -107,10 +107,10 @@ event FlashCallback(uint256 fee0, uint256 fee1)
 function flash(address pool, address recipient, uint256 amount0, uint256 amount1, uint256 pay0, uint256 pay1) external
 ```
 
-### pancakeV3FlashCallback
+### sectaDexFlashCallback
 
 ```solidity
-function pancakeV3FlashCallback(uint256 fee0, uint256 fee1, bytes data) external
+function sectaDexFlashCallback(uint256 fee0, uint256 fee1, bytes data) external
 ```
 
 Called to `msg.sender` after transferring to the recipient from IPancakeV3Pool#flash.

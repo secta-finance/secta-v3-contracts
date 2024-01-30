@@ -49,7 +49,7 @@ contract TestPancakeV3Router is IPancakeV3SwapCallback {
 
     event SwapCallback(int256 amount0Delta, int256 amount1Delta);
 
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata data

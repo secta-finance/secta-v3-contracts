@@ -20,10 +20,10 @@ function swapForExact1Multi(address recipient, address poolInput, address poolOu
 event SwapCallback(int256 amount0Delta, int256 amount1Delta)
 ```
 
-### pancakeV3SwapCallback
+### sectaDexSwapCallback
 
 ```solidity
-function pancakeV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) public
+function sectaDexSwapCallback(int256 amount0Delta, int256 amount1Delta, bytes data) public
 ```
 
 Called to `msg.sender` after executing a swap via IPancakeV3Pool#swap.

@@ -25,7 +25,7 @@ contract TestPancakeV3SwapPay is IPancakeV3SwapCallback {
         );
     }
 
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256,
         int256,
         bytes calldata data

@@ -33,7 +33,7 @@ abstract contract V3SwapRouter is IV3SwapRouter, PeripheryPaymentsWithFeeExtende
     }
 
     /// @inheritdoc IPancakeV3SwapCallback
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata _data

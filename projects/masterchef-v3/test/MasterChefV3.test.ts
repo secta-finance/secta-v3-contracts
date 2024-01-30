@@ -36,17 +36,17 @@ describe("MasterChefV3", function () {
 
     // Deploy factory
     const PancakeV3PoolDeployer = await ethers.getContractFactoryFromArtifact(PancakeV3PoolDeployerArtifact);
-    const pancakeV3PoolDeployer = await PancakeV3PoolDeployer.deploy();
+    const sectaDexPoolDeployer = await PancakeV3PoolDeployer.deploy();
 
     const PancakeV3Factory = await ethers.getContractFactoryFromArtifact(PancakeV3FactoryArtifact);
-    const pancakeV3Factory = await PancakeV3Factory.deploy(pancakeV3PoolDeployer.address);
+    const sectaDexFactory = await PancakeV3Factory.deploy(sectaDexPoolDeployer.address);
 
-    await pancakeV3PoolDeployer.setFactoryAddress(pancakeV3Factory.address);
+    await sectaDexPoolDeployer.setFactoryAddress(sectaDexFactory.address);
 
     const PancakeV3SwapRouter = await ethers.getContractFactoryFromArtifact(PancakeV3SwapRouterArtifact);
-    const pancakeV3SwapRouter = await PancakeV3SwapRouter.deploy(
-      pancakeV3PoolDeployer.address,
-      pancakeV3Factory.address,
+    const sectaDexSwapRouter = await PancakeV3SwapRouter.deploy(
+      sectaDexPoolDeployer.address,
+      sectaDexFactory.address,
       WETH9Address
     );
 
@@ -60,13 +60,13 @@ describe("MasterChefV3", function () {
     // ]);
     // await nonfungibleTokenPositionDescriptor.deployed();
     // TODO:
-    await PancakeV3SwapRouter.deploy(pancakeV3PoolDeployer.address, pancakeV3Factory.address, WETH9Address);
+    await PancakeV3SwapRouter.deploy(sectaDexPoolDeployer.address, sectaDexFactory.address, WETH9Address);
 
     // Deploy NFT position manager
     const NonfungiblePositionManager = await ethers.getContractFactoryFromArtifact(NonfungiblePositionManagerArtifact);
     const nonfungiblePositionManager = await NonfungiblePositionManager.deploy(
-      pancakeV3PoolDeployer.address,
-      pancakeV3Factory.address,
+      sectaDexPoolDeployer.address,
+      sectaDexFactory.address,
       WETH9Address,
       // nonfungibleTokenPositionDescriptor.address
       ethers.constants.AddressZero
@@ -76,8 +76,8 @@ describe("MasterChefV3", function () {
 
     // Deploy factory owner contract
     // const PancakeV3FactoryOwner = await ethers.getContractFactoryFromArtifact(PancakeV3FactoryOwnerArtifact);
-    // const pancakeV3FactoryOwner = await PancakeV3FactoryOwner.deploy(pancakeV3Factory.address);
-    // await pancakeV3Factory.setOwner(pancakeV3FactoryOwner.address);
+    // const sectaDexFactoryOwner = await PancakeV3FactoryOwner.deploy(sectaDexFactory.address);
+    // await sectaDexFactory.setOwner(sectaDexFactoryOwner.address);
 
     // Prepare for master chef v3
     const CakeToken = await ethers.getContractFactoryFromArtifact(CakeTokenArtifact);
@@ -130,13 +130,13 @@ describe("MasterChefV3", function () {
     const firstFarmingBlock = await time.latestBlock();
 
     const PancakeV3LmPoolDeployer = await ethers.getContractFactoryFromArtifact(PancakeV3LmPoolDeployerArtifact);
-    const pancakeV3LmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(
+    const sectaDexLmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(
       masterChefV3.address
-      // pancakeV3FactoryOwner.address
+      // sectaDexFactoryOwner.address
     );
-    // await pancakeV3FactoryOwner.setLmPoolDeployer(pancakeV3LmPoolDeployer.address);
-    await pancakeV3Factory.setLmPoolDeployer(pancakeV3LmPoolDeployer.address);
-    await masterChefV3.setLMPoolDeployer(pancakeV3LmPoolDeployer.address);
+    // await sectaDexFactoryOwner.setLmPoolDeployer(sectaDexLmPoolDeployer.address);
+    await sectaDexFactory.setLmPoolDeployer(sectaDexLmPoolDeployer.address);
+    await masterChefV3.setLMPoolDeployer(sectaDexLmPoolDeployer.address);
 
     // Deploy mock ERC20 tokens
     const tokenA = await ERC20Mock.deploy("Token A", "A");
@@ -157,10 +157,10 @@ describe("MasterChefV3", function () {
     await tokenD.mint(user1.address, ethers.utils.parseUnits("1000"));
     await tokenD.mint(user2.address, ethers.utils.parseUnits("1000"));
 
-    await tokenA.connect(admin).approve(pancakeV3SwapRouter.address, ethers.constants.MaxUint256);
-    await tokenB.connect(admin).approve(pancakeV3SwapRouter.address, ethers.constants.MaxUint256);
-    await tokenC.connect(admin).approve(pancakeV3SwapRouter.address, ethers.constants.MaxUint256);
-    await tokenD.connect(admin).approve(pancakeV3SwapRouter.address, ethers.constants.MaxUint256);
+    await tokenA.connect(admin).approve(sectaDexSwapRouter.address, ethers.constants.MaxUint256);
+    await tokenB.connect(admin).approve(sectaDexSwapRouter.address, ethers.constants.MaxUint256);
+    await tokenC.connect(admin).approve(sectaDexSwapRouter.address, ethers.constants.MaxUint256);
+    await tokenD.connect(admin).approve(sectaDexSwapRouter.address, ethers.constants.MaxUint256);
 
     await tokenA.connect(user1).approve(nonfungiblePositionManager.address, ethers.constants.MaxUint256);
     await tokenB.connect(user1).approve(nonfungiblePositionManager.address, ethers.constants.MaxUint256);
@@ -229,7 +229,7 @@ describe("MasterChefV3", function () {
     this.poolAddresses = poolAddresses;
     this.cakeToken = cakeToken;
     this.liquidityAmounts = liquidityAmounts;
-    this.swapRouter = pancakeV3SwapRouter;
+    this.swapRouter = sectaDexSwapRouter;
 
     await network.provider.send("evm_setAutomine", [false]);
   });

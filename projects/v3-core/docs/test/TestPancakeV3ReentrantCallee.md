@@ -8,9 +8,9 @@
 function swapToReenter(address pool) external
 ```
 
-### pancakeV3SwapCallback
+### sectaDexSwapCallback
 
 ```solidity
-function pancakeV3SwapCallback(int256, int256, bytes) external
+function sectaDexSwapCallback(int256, int256, bytes) external
 ```
 

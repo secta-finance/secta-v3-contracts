@@ -16,49 +16,49 @@ async function main() {
   const networkName = network.name
   console.log('owner', owner.address)
 
-  let pancakeV3PoolDeployer_address = ''
-  let pancakeV3PoolDeployer
+  let sectaDexPoolDeployer_address = ''
+  let sectaDexPoolDeployer
   const PancakeV3PoolDeployer = new ContractFactory(
     artifacts.PancakeV3PoolDeployer.abi,
     artifacts.PancakeV3PoolDeployer.bytecode,
     owner
   )
-  if (!pancakeV3PoolDeployer_address) {
-    pancakeV3PoolDeployer = await PancakeV3PoolDeployer.deploy()
+  if (!sectaDexPoolDeployer_address) {
+    sectaDexPoolDeployer = await PancakeV3PoolDeployer.deploy()
 
-    pancakeV3PoolDeployer_address = pancakeV3PoolDeployer.address
-    console.log('pancakeV3PoolDeployer', pancakeV3PoolDeployer_address)
+    sectaDexPoolDeployer_address = sectaDexPoolDeployer.address
+    console.log('sectaDexPoolDeployer', sectaDexPoolDeployer_address)
   } else {
-    pancakeV3PoolDeployer = new ethers.Contract(
-      pancakeV3PoolDeployer_address,
+    sectaDexPoolDeployer = new ethers.Contract(
+      sectaDexPoolDeployer_address,
       artifacts.PancakeV3PoolDeployer.abi,
       owner
     )
   }
 
-  let pancakeV3Factory_address = ''
-  let pancakeV3Factory
-  if (!pancakeV3Factory_address) {
+  let sectaDexFactory_address = ''
+  let sectaDexFactory
+  if (!sectaDexFactory_address) {
     const PancakeV3Factory = new ContractFactory(
       artifacts.PancakeV3Factory.abi,
       artifacts.PancakeV3Factory.bytecode,
       owner
     )
-    pancakeV3Factory = await PancakeV3Factory.deploy(pancakeV3PoolDeployer_address)
+    sectaDexFactory = await PancakeV3Factory.deploy(sectaDexPoolDeployer_address)
 
-    pancakeV3Factory_address = pancakeV3Factory.address
-    console.log('pancakeV3Factory', pancakeV3Factory_address)
+    sectaDexFactory_address = sectaDexFactory.address
+    console.log('sectaDexFactory', sectaDexFactory_address)
   } else {
-    pancakeV3Factory = new ethers.Contract(pancakeV3Factory_address, artifacts.PancakeV3Factory.abi, owner)
+    sectaDexFactory = new ethers.Contract(sectaDexFactory_address, artifacts.PancakeV3Factory.abi, owner)
   }
 
-  // Set FactoryAddress for pancakeV3PoolDeployer.
-  await pancakeV3PoolDeployer.setFactoryAddress(pancakeV3Factory_address);
+  // Set FactoryAddress for sectaDexPoolDeployer.
+  await sectaDexPoolDeployer.setFactoryAddress(sectaDexFactory_address);
 
 
   const contracts = {
-    PancakeV3Factory: pancakeV3Factory_address,
-    PancakeV3PoolDeployer: pancakeV3PoolDeployer_address,
+    PancakeV3Factory: sectaDexFactory_address,
+    PancakeV3PoolDeployer: sectaDexPoolDeployer_address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

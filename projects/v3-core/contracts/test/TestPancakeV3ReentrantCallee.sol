@@ -14,7 +14,7 @@ contract TestPancakeV3ReentrantCallee is IPancakeV3SwapCallback {
         IPancakeV3Pool(pool).swap(address(0), false, 1, TickMath.MAX_SQRT_RATIO - 1, new bytes(0));
     }
 
-    function pancakeV3SwapCallback(
+    function sectaDexSwapCallback(
         int256,
         int256,
         bytes calldata
