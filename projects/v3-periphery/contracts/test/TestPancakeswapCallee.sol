@@ -6,7 +6,7 @@ import '@sectafi/v3-core/contracts/libraries/SafeCast.sol';
 import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
-contract TestPancakeswapCallee is IPancakeV3SwapCallback {
+contract TestSectaFiCallee is IPancakeV3SwapCallback {
     using SafeCast for uint256;
 
     function swapExact0For1(
