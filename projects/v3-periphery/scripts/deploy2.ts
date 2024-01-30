@@ -10,7 +10,7 @@ type ContractJson = { abi: any; bytecode: string }
 const artifacts: { [name: string]: ContractJson } = {
   QuoterV2: require('../artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json'),
   TickLens: require('../artifacts/contracts/lens/TickLens.sol/TickLens.json'),
-  PancakeInterfaceMulticall: require('../artifacts/contracts/lens/PancakeInterfaceMulticall.sol/PancakeInterfaceMulticall.json'),
+  SectaInterfaceMulticall: require('../artifacts/contracts/lens/SectaInterfaceMulticall.sol/SectaInterfaceMulticall.json'),
   // eslint-disable-next-line global-require
   SwapRouter: require('../artifacts/contracts/SwapRouter.sol/SwapRouter.json'),
   // eslint-disable-next-line global-require
@@ -154,14 +154,14 @@ async function main() {
   // ])
   console.log('nonfungiblePositionManager', nonfungiblePositionManager.address)
 
-  const PancakeInterfaceMulticall = new ContractFactory(
-    artifacts.PancakeInterfaceMulticall.abi,
-    artifacts.PancakeInterfaceMulticall.bytecode,
+  const SectaInterfaceMulticall = new ContractFactory(
+    artifacts.SectaInterfaceMulticall.abi,
+    artifacts.SectaInterfaceMulticall.bytecode,
     owner
   )
 
-  const sectaInterfaceMulticall = await PancakeInterfaceMulticall.deploy()
-  console.log('PancakeInterfaceMulticall', sectaInterfaceMulticall.address)
+  const sectaInterfaceMulticall = await SectaInterfaceMulticall.deploy()
+  console.log('SectaInterfaceMulticall', sectaInterfaceMulticall.address)
 
   // await tryVerify(sectaInterfaceMulticall)
 
@@ -185,7 +185,7 @@ async function main() {
     // NFTDescriptorEx: nftDescriptorEx.address,
     NonfungibleTokenPositionDescriptor: nonfungibleTokenPositionDescriptor.address,
     NonfungiblePositionManager: nonfungiblePositionManager.address,
-    PancakeInterfaceMulticall: sectaInterfaceMulticall.address,
+    SectaInterfaceMulticall: sectaInterfaceMulticall.address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

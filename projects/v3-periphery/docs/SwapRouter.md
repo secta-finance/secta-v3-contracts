@@ -2,7 +2,7 @@
 
 ## SwapRouter
 
-Router for stateless execution of swaps against Pancake V3
+Router for stateless execution of swaps against Secta V3
 
 ### constructor
 

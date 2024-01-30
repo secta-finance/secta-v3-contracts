@@ -3,7 +3,7 @@ pragma abicoder v2;
 
 import '../../../../../contracts/test/TestERC20.sol';
 import '../../../../../contracts/SectaDexPool.sol';
-import '../../../../../contracts/PancakesV3Factory.sol';
+import '../../../../../contracts/SectasV3Factory.sol';
 
 contract SetupToken {
     TestERC20 public token;
@@ -62,10 +62,10 @@ contract SetupUniswap {
     // fee 500   + tickSpacing 10
     // fee 3000  + tickSpacing 60
     // fee 10000 + tickSpacing 200
-    PancakesV3Factory factory;
+    SectasV3Factory factory;
 
     constructor(TestERC20 _token0, TestERC20 _token1) public {
-        factory = new PancakesV3Factory();
+        factory = new SectasV3Factory();
         token0 = _token0;
         token1 = _token1;
     }

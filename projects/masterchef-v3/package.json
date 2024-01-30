@@ -1,7 +1,7 @@
 {
   "name": "@sectafi/masterchef-v3",
   "version": "1.0.0",
-  "description": "Pancake MasterChef V3",
+  "description": "Secta MasterChef V3",
   "publishConfig": {
     "access": "public"
   },

@@ -1,8 +1,8 @@
 # Solidity API
 
-## PancakeInterfaceMulticall
+## SectaInterfaceMulticall
 
-A fork of Multicall2 specifically tailored for the Pancake Interface
+A fork of Multicall2 specifically tailored for the Secta Interface
 
 ### Call
 
@@ -39,6 +39,6 @@ function getEthBalance(address addr) public view returns (uint256 balance)
 ### multicall
 
 ```solidity
-function multicall(struct PancakeInterfaceMulticall.Call[] calls) public returns (uint256 blockNumber, struct PancakeInterfaceMulticall.Result[] returnData)
+function multicall(struct SectaInterfaceMulticall.Call[] calls) public returns (uint256 blockNumber, struct SectaInterfaceMulticall.Result[] returnData)
 ```
 

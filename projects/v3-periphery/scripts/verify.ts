@@ -38,7 +38,7 @@ async function main() {
 
   // Verify sectaInterfaceMulticall
   console.log('Verify sectaInterfaceMulticall')
-  await verifyContract(deployedContracts_v3_periphery.PancakeInterfaceMulticall)
+  await verifyContract(deployedContracts_v3_periphery.SectaInterfaceMulticall)
   await sleep(10000)
 
   // Verify tickLens

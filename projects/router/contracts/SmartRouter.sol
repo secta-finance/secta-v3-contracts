@@ -10,7 +10,7 @@ import './V3SwapRouter.sol';
 import './base/ApproveAndCall.sol';
 import './base/MulticallExtended.sol';
 
-/// @title Pancake Smart Router
+/// @title Secta Smart Router
 contract SmartRouter is ISmartRouter, V3SwapRouter, ApproveAndCall, MulticallExtended, SelfPermit {
     constructor(
         address _deployer,

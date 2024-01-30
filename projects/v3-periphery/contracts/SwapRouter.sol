@@ -17,8 +17,8 @@ import './libraries/PoolAddress.sol';
 import './libraries/CallbackValidation.sol';
 import './interfaces/external/IWETH9.sol';
 
-/// @title Pancake V3 Swap Router
-/// @notice Router for stateless execution of swaps against Pancake V3
+/// @title Secta V3 Swap Router
+/// @notice Router for stateless execution of swaps against Secta V3
 contract SwapRouter is
     ISwapRouter,
     PeripheryImmutableState,

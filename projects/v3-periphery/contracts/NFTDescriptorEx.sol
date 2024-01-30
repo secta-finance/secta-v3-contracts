@@ -136,7 +136,7 @@ contract NFTDescriptorEx {
         return
         string(
             abi.encodePacked(
-                'This NFT represents a liquidity position in a Pancake V3 ',
+                'This NFT represents a liquidity position in a Secta V3 ',
                 quoteTokenSymbol,
                 '-',
                 baseTokenSymbol,
@@ -184,7 +184,7 @@ contract NFTDescriptorEx {
     return
         string(
             abi.encodePacked(
-                'Pancake - ',
+                'Secta - ',
                 feeTier,
                 ' - ',
                 escapeQuotes(params.quoteTokenSymbol),

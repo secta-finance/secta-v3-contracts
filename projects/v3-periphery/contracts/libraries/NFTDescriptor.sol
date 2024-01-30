@@ -160,7 +160,7 @@ library NFTDescriptor {
         return
             string(
                 abi.encodePacked(
-                    'Pancake - ',
+                    'Secta - ',
                     feeTier,
                     ' - ',
                     escapeQuotes(params.quoteTokenSymbol),
