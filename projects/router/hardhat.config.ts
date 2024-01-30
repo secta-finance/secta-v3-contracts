@@ -85,19 +85,19 @@ const config: HardhatUserConfig = {
       },
     ],
     overrides: {
-      '@pancakeswap/v3-core/contracts/libraries/FullMath.sol': {
+      '@sectafi/v3-core/contracts/libraries/FullMath.sol': {
         version: '0.7.6',
         settings: {},
       },
-      '@pancakeswap/v3-core/contracts/libraries/TickBitmap.sol': {
+      '@sectafi/v3-core/contracts/libraries/TickBitmap.sol': {
         version: '0.7.6',
         settings: {},
       },
-      '@pancakeswap/v3-core/contracts/libraries/TickMath.sol': {
+      '@sectafi/v3-core/contracts/libraries/TickMath.sol': {
         version: '0.7.6',
         settings: {},
       },
-      '@pancakeswap/v3-periphery/contracts/libraries/PoolAddress.sol': {
+      '@sectafi/v3-periphery/contracts/libraries/PoolAddress.sol': {
         version: '0.7.6',
         settings: {},
       },

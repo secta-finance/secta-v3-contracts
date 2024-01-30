@@ -1,6 +1,6 @@
-import { verifyContract } from '@pancakeswap/common/verify'
-import { sleep } from '@pancakeswap/common/sleep'
-import { configs } from '@pancakeswap/common/config'
+import { verifyContract } from '@sectafi/common/verify'
+import { sleep } from '@sectafi/common/sleep'
+import { configs } from '@sectafi/common/config'
 
 async function main() {
   const networkName = network.name
@@ -9,9 +9,9 @@ async function main() {
   if (!config) {
     throw new Error(`No config found for network ${networkName}`)
   }
-  const deployedContracts_v3_core = await import(`@pancakeswap/v3-core/deployments/${networkName}.json`)
-  const deployedContracts_v3_periphery = await import(`@pancakeswap/v3-periphery/deployments/${networkName}.json`)
-  const deployedContracts_smart_router = await import(`@pancakeswap/smart-router/deployments/${networkName}.json`)
+  const deployedContracts_v3_core = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
+  const deployedContracts_v3_periphery = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
+  const deployedContracts_smart_router = await import(`@sectafi/smart-router/deployments/${networkName}.json`)
 
   // Verify SmartRouterHelper
   console.log('Verify SmartRouterHelper')

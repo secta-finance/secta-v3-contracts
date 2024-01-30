@@ -2,8 +2,8 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@pancakeswap/v3-core/contracts/libraries/LowGasSafeMath.sol';
-import '@pancakeswap/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/libraries/LowGasSafeMath.sol';
+import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
 
 library SmartRouterHelper {
     using LowGasSafeMath for uint256;

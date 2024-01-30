@@ -2,7 +2,7 @@
 pragma solidity >=0.7.5;
 pragma abicoder v2;
 
-import '@pancakeswap/v3-periphery/contracts/interfaces/ISelfPermit.sol';
+import '@sectafi/v3-periphery/contracts/interfaces/ISelfPermit.sol';
 
 import './IV3SwapRouter.sol';
 import './IApproveAndCall.sol';
