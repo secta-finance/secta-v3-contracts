@@ -2,7 +2,7 @@
 pragma solidity >=0.7.0;
 pragma abicoder v2;
 
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 import '@sectafi/v3-core/contracts/libraries/TickMath.sol';
 import '@sectafi/v3-core/contracts/libraries/BitMath.sol';
 import '@sectafi/v3-core/contracts/libraries/FullMath.sol';

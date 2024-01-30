@@ -3,13 +3,13 @@ import { ethers, upgrades } from "hardhat";
 import { time, mineUpTo, reset } from "@nomicfoundation/hardhat-network-helpers";
 import { TickMath } from "@uniswap/v3-sdk";
 
-import PancakeV3PoolDeployerArtifact from "@sectafi/v3-core/artifacts/contracts/PancakeV3PoolDeployer.sol/PancakeV3PoolDeployer.json";
-import PancakeV3FactoryArtifact from "@sectafi/v3-core/artifacts/contracts/PancakeV3Factory.sol/PancakeV3Factory.json";
-// import PancakeV3FactoryOwnerArtifact from "@sectafi/v3-core/artifacts/contracts/PancakeV3FactoryOwner.sol/PancakeV3FactoryOwner.json";
-import PancakeV3SwapRouterArtifact from "@sectafi/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json";
+import SectaDexPoolDeployerArtifact from "@sectafi/v3-core/artifacts/contracts/SectaDexPoolDeployer.sol/SectaDexPoolDeployer.json";
+import SectaDexFactoryArtifact from "@sectafi/v3-core/artifacts/contracts/SectaDexFactory.sol/SectaDexFactory.json";
+// import SectaDexFactoryOwnerArtifact from "@sectafi/v3-core/artifacts/contracts/SectaDexFactoryOwner.sol/SectaDexFactoryOwner.json";
+import SectaDexSwapRouterArtifact from "@sectafi/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json";
 import NftDescriptorOffchainArtifact from "@sectafi/v3-periphery/artifacts/contracts/NonfungibleTokenPositionDescriptorOffChain.sol/NonfungibleTokenPositionDescriptorOffChain.json";
 import NonfungiblePositionManagerArtifact from "@sectafi/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json";
-import PancakeV3LmPoolDeployerArtifact from "@sectafi/v3-lm-pool/artifacts/contracts/PancakeV3LmPoolDeployer.sol/PancakeV3LmPoolDeployer.json";
+import SectaDexLmPoolDeployerArtifact from "@sectafi/v3-lm-pool/artifacts/contracts/SectaDexLmPoolDeployer.sol/SectaDexLmPoolDeployer.json";
 import TestLiquidityAmountsArtifact from "@sectafi/v3-periphery/artifacts/contracts/test/LiquidityAmountsTest.sol/LiquidityAmountsTest.json";
 
 import ERC20MockArtifact from "./ERC20Mock.json";
@@ -35,16 +35,16 @@ describe("MasterChefV3", function () {
     reset();
 
     // Deploy factory
-    const PancakeV3PoolDeployer = await ethers.getContractFactoryFromArtifact(PancakeV3PoolDeployerArtifact);
-    const sectaDexPoolDeployer = await PancakeV3PoolDeployer.deploy();
+    const SectaDexPoolDeployer = await ethers.getContractFactoryFromArtifact(SectaDexPoolDeployerArtifact);
+    const sectaDexPoolDeployer = await SectaDexPoolDeployer.deploy();
 
-    const PancakeV3Factory = await ethers.getContractFactoryFromArtifact(PancakeV3FactoryArtifact);
-    const sectaDexFactory = await PancakeV3Factory.deploy(sectaDexPoolDeployer.address);
+    const SectaDexFactory = await ethers.getContractFactoryFromArtifact(SectaDexFactoryArtifact);
+    const sectaDexFactory = await SectaDexFactory.deploy(sectaDexPoolDeployer.address);
 
     await sectaDexPoolDeployer.setFactoryAddress(sectaDexFactory.address);
 
-    const PancakeV3SwapRouter = await ethers.getContractFactoryFromArtifact(PancakeV3SwapRouterArtifact);
-    const sectaDexSwapRouter = await PancakeV3SwapRouter.deploy(
+    const SectaDexSwapRouter = await ethers.getContractFactoryFromArtifact(SectaDexSwapRouterArtifact);
+    const sectaDexSwapRouter = await SectaDexSwapRouter.deploy(
       sectaDexPoolDeployer.address,
       sectaDexFactory.address,
       WETH9Address
@@ -60,7 +60,7 @@ describe("MasterChefV3", function () {
     // ]);
     // await nonfungibleTokenPositionDescriptor.deployed();
     // TODO:
-    await PancakeV3SwapRouter.deploy(sectaDexPoolDeployer.address, sectaDexFactory.address, WETH9Address);
+    await SectaDexSwapRouter.deploy(sectaDexPoolDeployer.address, sectaDexFactory.address, WETH9Address);
 
     // Deploy NFT position manager
     const NonfungiblePositionManager = await ethers.getContractFactoryFromArtifact(NonfungiblePositionManagerArtifact);
@@ -75,8 +75,8 @@ describe("MasterChefV3", function () {
     const ERC20Mock = await ethers.getContractFactoryFromArtifact(ERC20MockArtifact);
 
     // Deploy factory owner contract
-    // const PancakeV3FactoryOwner = await ethers.getContractFactoryFromArtifact(PancakeV3FactoryOwnerArtifact);
-    // const sectaDexFactoryOwner = await PancakeV3FactoryOwner.deploy(sectaDexFactory.address);
+    // const SectaDexFactoryOwner = await ethers.getContractFactoryFromArtifact(SectaDexFactoryOwnerArtifact);
+    // const sectaDexFactoryOwner = await SectaDexFactoryOwner.deploy(sectaDexFactory.address);
     // await sectaDexFactory.setOwner(sectaDexFactoryOwner.address);
 
     // Prepare for master chef v3
@@ -129,8 +129,8 @@ describe("MasterChefV3", function () {
     await masterChefV2.deposit(1, await dummyTokenV3.balanceOf(admin.address));
     const firstFarmingBlock = await time.latestBlock();
 
-    const PancakeV3LmPoolDeployer = await ethers.getContractFactoryFromArtifact(PancakeV3LmPoolDeployerArtifact);
-    const sectaDexLmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(
+    const SectaDexLmPoolDeployer = await ethers.getContractFactoryFromArtifact(SectaDexLmPoolDeployerArtifact);
+    const sectaDexLmPoolDeployer = await SectaDexLmPoolDeployer.deploy(
       masterChefV3.address
       // sectaDexFactoryOwner.address
     );

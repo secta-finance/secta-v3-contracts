@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity =0.7.6;
 
-import '@sectafi/v3-core/contracts/interfaces/callback/IPancakeV3SwapCallback.sol';
+import '@sectafi/v3-core/contracts/interfaces/callback/ISectaDexSwapCallback.sol';
 import '@sectafi/v3-core/contracts/libraries/SafeCast.sol';
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
-contract TestSectaFiCallee is IPancakeV3SwapCallback {
+contract TestSectaFiCallee is ISectaDexSwapCallback {
     using SafeCast for uint256;
 
     function swapExact0For1(
@@ -15,7 +15,7 @@ contract TestSectaFiCallee is IPancakeV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IPancakeV3Pool(pool).swap(recipient, true, amount0In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        ISectaDexPool(pool).swap(recipient, true, amount0In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function swap0ForExact1(
@@ -24,7 +24,7 @@ contract TestSectaFiCallee is IPancakeV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IPancakeV3Pool(pool).swap(recipient, true, -amount1Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        ISectaDexPool(pool).swap(recipient, true, -amount1Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function swapExact1For0(
@@ -33,7 +33,7 @@ contract TestSectaFiCallee is IPancakeV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IPancakeV3Pool(pool).swap(recipient, false, amount1In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        ISectaDexPool(pool).swap(recipient, false, amount1In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function swap1ForExact0(
@@ -42,7 +42,7 @@ contract TestSectaFiCallee is IPancakeV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IPancakeV3Pool(pool).swap(recipient, false, -amount0Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        ISectaDexPool(pool).swap(recipient, false, -amount0Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function sectaDexSwapCallback(
@@ -53,10 +53,10 @@ contract TestSectaFiCallee is IPancakeV3SwapCallback {
         address sender = abi.decode(data, (address));
 
         if (amount0Delta > 0) {
-            IERC20(IPancakeV3Pool(msg.sender).token0()).transferFrom(sender, msg.sender, uint256(amount0Delta));
+            IERC20(ISectaDexPool(msg.sender).token0()).transferFrom(sender, msg.sender, uint256(amount0Delta));
         } else {
             assert(amount1Delta > 0);
-            IERC20(IPancakeV3Pool(msg.sender).token1()).transferFrom(sender, msg.sender, uint256(amount1Delta));
+            IERC20(ISectaDexPool(msg.sender).token1()).transferFrom(sender, msg.sender, uint256(amount1Delta));
         }
     }
 }

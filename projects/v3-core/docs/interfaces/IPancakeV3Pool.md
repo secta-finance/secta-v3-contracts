@@ -1,6 +1,6 @@
 # Solidity API
 
-## IPancakeV3Pool
+## ISectaDexPool
 
 A SectaFi pool facilitates swapping and automated market making between any two assets that strictly conform
 to the ERC20 specification

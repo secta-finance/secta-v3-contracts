@@ -2,8 +2,8 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Factory.sol';
-import '@sectafi/v3-core/contracts/interfaces/callback/IPancakeV3MintCallback.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexFactory.sol';
+import '@sectafi/v3-core/contracts/interfaces/callback/ISectaDexMintCallback.sol';
 import '@sectafi/v3-core/contracts/libraries/TickMath.sol';
 
 import '../libraries/PoolAddress.sol';
@@ -15,13 +15,13 @@ import './PeripheryImmutableState.sol';
 
 /// @title Liquidity management functions
 /// @notice Internal functions for safely managing liquidity in SectaFi Dex
-abstract contract LiquidityManagement is IPancakeV3MintCallback, PeripheryImmutableState, PeripheryPayments {
+abstract contract LiquidityManagement is ISectaDexMintCallback, PeripheryImmutableState, PeripheryPayments {
     struct MintCallbackData {
         PoolAddress.PoolKey poolKey;
         address payer;
     }
 
-    /// @inheritdoc IPancakeV3MintCallback
+    /// @inheritdoc ISectaDexMintCallback
     function sectaDexMintCallback(
         uint256 amount0Owed,
         uint256 amount1Owed,
@@ -54,13 +54,13 @@ abstract contract LiquidityManagement is IPancakeV3MintCallback, PeripheryImmuta
             uint128 liquidity,
             uint256 amount0,
             uint256 amount1,
-            IPancakeV3Pool pool
+            ISectaDexPool pool
         )
     {
         PoolAddress.PoolKey memory poolKey =
             PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee});
 
-        pool = IPancakeV3Pool(PoolAddress.computeAddress(deployer, poolKey));
+        pool = ISectaDexPool(PoolAddress.computeAddress(deployer, poolKey));
 
         // compute the liquidity amount
         {

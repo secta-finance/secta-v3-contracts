@@ -1,4 +1,4 @@
-import { bytecode } from '@sectafi/v3-core/artifacts/contracts/PancakeV3Pool.sol/PancakeV3Pool.json'
+import { bytecode } from '@sectafi/v3-core/artifacts/contracts/SectaDexPool.sol/SectaDexPool.json'
 import { utils } from 'ethers'
 
 export const POOL_BYTECODE_HASH = utils.keccak256(bytecode)

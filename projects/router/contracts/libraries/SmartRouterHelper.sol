@@ -3,7 +3,7 @@ pragma solidity =0.7.6;
 pragma abicoder v2;
 
 import '@sectafi/v3-core/contracts/libraries/LowGasSafeMath.sol';
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 
 library SmartRouterHelper {
     using LowGasSafeMath for uint256;
@@ -59,8 +59,8 @@ library SmartRouterHelper {
         address tokenA,
         address tokenB,
         uint24 fee
-    ) public pure returns (IPancakeV3Pool) {
-        return IPancakeV3Pool(computeAddress(deployer, getPoolKey(tokenA, tokenB, fee)));
+    ) public pure returns (ISectaDexPool) {
+        return ISectaDexPool(computeAddress(deployer, getPoolKey(tokenA, tokenB, fee)));
     }
 
     /// @notice Returns the address of a valid SectaFi Dex Pool
@@ -74,7 +74,7 @@ library SmartRouterHelper {
         address tokenA,
         address tokenB,
         uint24 fee
-    ) public view returns (IPancakeV3Pool pool) {
+    ) public view returns (ISectaDexPool pool) {
         return verifyCallback(deployer, getPoolKey(tokenA, tokenB, fee));
     }
 
@@ -85,9 +85,9 @@ library SmartRouterHelper {
     function verifyCallback(address deployer, PoolKey memory poolKey)
         public
         view
-        returns (IPancakeV3Pool pool)
+        returns (ISectaDexPool pool)
     {
-        pool = IPancakeV3Pool(computeAddress(deployer, poolKey));
+        pool = ISectaDexPool(computeAddress(deployer, poolKey));
         require(msg.sender == address(pool));
     }
 }

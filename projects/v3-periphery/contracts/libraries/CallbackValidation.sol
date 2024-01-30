@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 import './PoolAddress.sol';
 
 /// @notice Provides validation for callbacks from SectaFi Dex Pools
@@ -17,7 +17,7 @@ library CallbackValidation {
         address tokenA,
         address tokenB,
         uint24 fee
-    ) internal view returns (IPancakeV3Pool pool) {
+    ) internal view returns (ISectaDexPool pool) {
         return verifyCallback(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee));
     }
 
@@ -28,9 +28,9 @@ library CallbackValidation {
     function verifyCallback(address deployer, PoolAddress.PoolKey memory poolKey)
         internal
         view
-        returns (IPancakeV3Pool pool)
+        returns (ISectaDexPool pool)
     {
-        pool = IPancakeV3Pool(PoolAddress.computeAddress(deployer, poolKey));
+        pool = ISectaDexPool(PoolAddress.computeAddress(deployer, poolKey));
         require(msg.sender == address(pool));
     }
 }

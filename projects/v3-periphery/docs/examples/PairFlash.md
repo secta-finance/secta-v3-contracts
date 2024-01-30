@@ -67,7 +67,7 @@ struct FlashParams {
 function initFlash(struct PairFlash.FlashParams params) external
 ```
 
-Calls the pools flash function with data needed in `PancakeV3FlashCallback`
+Calls the pools flash function with data needed in `SectaDexFlashCallback`
 
 #### Parameters
 

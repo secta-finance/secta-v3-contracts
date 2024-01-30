@@ -5,8 +5,8 @@ pragma abicoder v2;
 import '@sectafi/v3-core/contracts/libraries/SafeCast.sol';
 import '@sectafi/v3-core/contracts/libraries/TickMath.sol';
 import '@sectafi/v3-core/contracts/libraries/TickBitmap.sol';
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
-import '@sectafi/v3-core/contracts/interfaces/callback/IPancakeV3SwapCallback.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
+import '@sectafi/v3-core/contracts/interfaces/callback/ISectaDexSwapCallback.sol';
 
 import '../interfaces/IQuoterV2.sol';
 import '../base/PeripheryImmutableState.sol';
@@ -19,10 +19,10 @@ import '../libraries/PoolTicksCounter.sol';
 /// @notice Allows getting the expected amount out or amount in for a given swap without executing the swap
 /// @dev These functions are not gas efficient and should _not_ be called on chain. Instead, optimistically execute
 /// the swap and check the amounts in the callback.
-contract QuoterV2 is IQuoterV2, IPancakeV3SwapCallback, PeripheryImmutableState {
+contract QuoterV2 is IQuoterV2, ISectaDexSwapCallback, PeripheryImmutableState {
     using Path for bytes;
     using SafeCast for uint256;
-    using PoolTicksCounter for IPancakeV3Pool;
+    using PoolTicksCounter for ISectaDexPool;
 
     /// @dev Transient storage variable used to check a safety condition in exact output swaps.
     uint256 private amountOutCached;
@@ -33,11 +33,11 @@ contract QuoterV2 is IQuoterV2, IPancakeV3SwapCallback, PeripheryImmutableState 
         address tokenA,
         address tokenB,
         uint24 fee
-    ) private view returns (IPancakeV3Pool) {
-        return IPancakeV3Pool(PoolAddress.computeAddress(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
+    ) private view returns (ISectaDexPool) {
+        return ISectaDexPool(PoolAddress.computeAddress(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
     }
 
-    /// @inheritdoc IPancakeV3SwapCallback
+    /// @inheritdoc ISectaDexSwapCallback
     function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
@@ -52,7 +52,7 @@ contract QuoterV2 is IQuoterV2, IPancakeV3SwapCallback, PeripheryImmutableState 
                 ? (tokenIn < tokenOut, uint256(amount0Delta), uint256(-amount1Delta))
                 : (tokenOut < tokenIn, uint256(amount1Delta), uint256(-amount0Delta));
 
-        IPancakeV3Pool pool = getPool(tokenIn, tokenOut, fee);
+        ISectaDexPool pool = getPool(tokenIn, tokenOut, fee);
         (uint160 sqrtPriceX96After, int24 tickAfter, , , , , ) = pool.slot0();
 
         if (isExactInput) {
@@ -98,7 +98,7 @@ contract QuoterV2 is IQuoterV2, IPancakeV3SwapCallback, PeripheryImmutableState 
 
     function handleRevert(
         bytes memory reason,
-        IPancakeV3Pool pool,
+        ISectaDexPool pool,
         uint256 gasEstimate
     )
         private
@@ -131,7 +131,7 @@ contract QuoterV2 is IQuoterV2, IPancakeV3SwapCallback, PeripheryImmutableState 
         )
     {
         bool zeroForOne = params.tokenIn < params.tokenOut;
-        IPancakeV3Pool pool = getPool(params.tokenIn, params.tokenOut, params.fee);
+        ISectaDexPool pool = getPool(params.tokenIn, params.tokenOut, params.fee);
 
         uint256 gasBefore = gasleft();
         try
@@ -205,7 +205,7 @@ contract QuoterV2 is IQuoterV2, IPancakeV3SwapCallback, PeripheryImmutableState 
         )
     {
         bool zeroForOne = params.tokenIn < params.tokenOut;
-        IPancakeV3Pool pool = getPool(params.tokenIn, params.tokenOut, params.fee);
+        ISectaDexPool pool = getPool(params.tokenIn, params.tokenOut, params.fee);
 
         // if no price limit has been specified, cache the output amount for comparison in the swap callback
         if (params.sqrtPriceLimitX96 == 0) amountOutCached = params.amount;

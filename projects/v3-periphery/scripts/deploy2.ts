@@ -63,8 +63,8 @@ async function main() {
 
   const deployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
 
-  const sectaDexPoolDeployer_address = deployedContracts.PancakeV3PoolDeployer
-  const sectaDexFactory_address = deployedContracts.PancakeV3Factory
+  const sectaDexPoolDeployer_address = deployedContracts.SectaDexPoolDeployer
+  const sectaDexFactory_address = deployedContracts.SectaDexFactory
 
   const SwapRouter = new ContractFactory(artifacts.SwapRouter.abi, artifacts.SwapRouter.bytecode, owner)
   const swapRouter = await SwapRouter.deploy(sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE)

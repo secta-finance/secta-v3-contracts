@@ -4,7 +4,7 @@ pragma abicoder v2;
 
 import '@sectafi/v3-core/contracts/libraries/SafeCast.sol';
 import '@sectafi/v3-core/contracts/libraries/TickMath.sol';
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 
 import './interfaces/ISwapRouter.sol';
 import './base/PeripheryImmutableState.sol';
@@ -44,8 +44,8 @@ contract SwapRouter is
         address tokenA,
         address tokenB,
         uint24 fee
-    ) private view returns (IPancakeV3Pool) {
-        return IPancakeV3Pool(PoolAddress.computeAddress(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
+    ) private view returns (ISectaDexPool) {
+        return ISectaDexPool(PoolAddress.computeAddress(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
     }
 
     struct SwapCallbackData {
@@ -53,7 +53,7 @@ contract SwapRouter is
         address payer;
     }
 
-    /// @inheritdoc IPancakeV3SwapCallback
+    /// @inheritdoc ISectaDexSwapCallback
     function sectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,

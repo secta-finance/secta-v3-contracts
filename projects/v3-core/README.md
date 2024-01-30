@@ -9,14 +9,14 @@ repository.
 In order to deploy this code to a local testnet, you should install the npm package
 `@sectafi/v3-core`
 and import the factory bytecode located at
-`@sectafi/v3-core/artifacts/contracts/PancakeV3Factory.sol/PancakeV3Factory.json`.
+`@sectafi/v3-core/artifacts/contracts/SectaDexFactory.sol/SectaDexFactory.json`.
 For example:
 
 ```typescript
 import {
   abi as FACTORY_ABI,
   bytecode as FACTORY_BYTECODE,
-} from '@sectafi/v3-core/artifacts/contracts/PancakeV3Factory.sol/PancakeV3Factory.json'
+} from '@sectafi/v3-core/artifacts/contracts/SectaDexFactory.sol/SectaDexFactory.json'
 
 // deploy the bytecode
 ```
@@ -31,10 +31,10 @@ The SectaFi Dex interfaces are available for import into solidity smart contract
 via the npm artifact `@sectafi/v3-core`, e.g.:
 
 ```solidity
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 
 contract MyContract {
-  IPancakeV3Pool pool;
+  ISectaDexPool pool;
 
   function doSomethingWithPool() {
     // pool.swap(...);

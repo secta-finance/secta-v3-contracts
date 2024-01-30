@@ -2,11 +2,11 @@
 pragma solidity >=0.7.5;
 pragma abicoder v2;
 
-import '@sectafi/v3-core/contracts/interfaces/callback/IPancakeV3SwapCallback.sol';
+import '@sectafi/v3-core/contracts/interfaces/callback/ISectaDexSwapCallback.sol';
 
 /// @title Router token swapping functionality
 /// @notice Functions for swapping tokens via SectaFi Dex
-interface ISwapRouter is IPancakeV3SwapCallback {
+interface ISwapRouter is ISectaDexSwapCallback {
     struct ExactInputSingleParams {
         address tokenIn;
         address tokenOut;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Factory.sol';
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexFactory.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 
 import './PeripheryImmutableState.sol';
 import '../interfaces/IPoolInitializer.sol';
@@ -17,15 +17,15 @@ abstract contract PoolInitializer is IPoolInitializer, PeripheryImmutableState {
         uint160 sqrtPriceX96
     ) external payable override returns (address pool) {
         require(token0 < token1);
-        pool = IPancakeV3Factory(factory).getPool(token0, token1, fee);
+        pool = ISectaDexFactory(factory).getPool(token0, token1, fee);
 
         if (pool == address(0)) {
-            pool = IPancakeV3Factory(factory).createPool(token0, token1, fee);
-            IPancakeV3Pool(pool).initialize(sqrtPriceX96);
+            pool = ISectaDexFactory(factory).createPool(token0, token1, fee);
+            ISectaDexPool(pool).initialize(sqrtPriceX96);
         } else {
-            (uint160 sqrtPriceX96Existing, , , , , , ) = IPancakeV3Pool(pool).slot0();
+            (uint160 sqrtPriceX96Existing, , , , , , ) = ISectaDexPool(pool).slot0();
             if (sqrtPriceX96Existing == 0) {
-                IPancakeV3Pool(pool).initialize(sqrtPriceX96);
+                ISectaDexPool(pool).initialize(sqrtPriceX96);
             }
         }
     }

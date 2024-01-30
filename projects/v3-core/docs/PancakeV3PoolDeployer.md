@@ -1,6 +1,6 @@
 # Solidity API
 
-## PancakeV3PoolDeployer
+## SectaDexPoolDeployer
 
 ### Parameters
 
@@ -17,7 +17,7 @@ struct Parameters {
 ### parameters
 
 ```solidity
-struct PancakeV3PoolDeployer.Parameters parameters
+struct SectaDexPoolDeployer.Parameters parameters
 ```
 
 Get the parameters to be used in constructing the pool, set transiently during pool creation.

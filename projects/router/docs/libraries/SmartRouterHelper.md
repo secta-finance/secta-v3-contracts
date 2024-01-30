@@ -118,7 +118,7 @@ Deterministically computes the pool address given the deployer and PoolKey
 ### getPool
 
 ```solidity
-function getPool(address deployer, address tokenA, address tokenB, uint24 fee) public pure returns (contract IPancakeV3Pool)
+function getPool(address deployer, address tokenA, address tokenB, uint24 fee) public pure returns (contract ISectaDexPool)
 ```
 
 _Returns the pool for the given token pair and fee. The pool contract may or may not exist._
@@ -126,7 +126,7 @@ _Returns the pool for the given token pair and fee. The pool contract may or may
 ### verifyCallback
 
 ```solidity
-function verifyCallback(address deployer, address tokenA, address tokenB, uint24 fee) public view returns (contract IPancakeV3Pool pool)
+function verifyCallback(address deployer, address tokenA, address tokenB, uint24 fee) public view returns (contract ISectaDexPool pool)
 ```
 
 Returns the address of a valid SectaFi Dex Pool
@@ -144,12 +144,12 @@ Returns the address of a valid SectaFi Dex Pool
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| pool | contract IPancakeV3Pool | The V3 pool contract address |
+| pool | contract ISectaDexPool | The V3 pool contract address |
 
 ### verifyCallback
 
 ```solidity
-function verifyCallback(address deployer, struct SmartRouterHelper.PoolKey poolKey) public view returns (contract IPancakeV3Pool pool)
+function verifyCallback(address deployer, struct SmartRouterHelper.PoolKey poolKey) public view returns (contract ISectaDexPool pool)
 ```
 
 Returns the address of a valid SectaFi Dex Pool
@@ -165,5 +165,5 @@ Returns the address of a valid SectaFi Dex Pool
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| pool | contract IPancakeV3Pool | The V3 pool contract address |
+| pool | contract ISectaDexPool | The V3 pool contract address |
 

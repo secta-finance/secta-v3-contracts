@@ -1,6 +1,6 @@
 # Solidity API
 
-## IPancakeV3PoolDeployer
+## ISectaDexPoolDeployer
 
 A contract that constructs a pool must implement this to pass arguments to the pool
 

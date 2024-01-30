@@ -22,8 +22,8 @@ async function main() {
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_smart_router.SmartRouter, [
     config.v2Factory,
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     deployedContracts_v3_periphery.NonfungiblePositionManager,
     config.stableFactory,
     config.stableInfo,
@@ -34,8 +34,8 @@ async function main() {
   // Verify quoterV2
   console.log('Verify quoterV2')
   await verifyContract(deployedContracts_smart_router.QuoterV2, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
   ])
   await sleep(10000)

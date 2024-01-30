@@ -3,7 +3,7 @@ pragma solidity >=0.5.0;
 
 /// @title The interface for the SectaFi Dex Factory
 /// @notice The SectaFi Dex Factory facilitates creation of SectaFi Dex pools and control over the protocol fees
-interface IPancakeV3Factory {
+interface ISectaDexFactory {
     struct TickSpacingExtraInfo {
         bool whitelistRequested;
         bool enabled;

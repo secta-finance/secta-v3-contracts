@@ -1,6 +1,6 @@
 # Solidity API
 
-## TestPancakeV3ReentrantCallee
+## TestSectaDexReentrantCallee
 
 ### swapToReenter
 

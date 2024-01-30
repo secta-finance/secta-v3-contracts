@@ -1,6 +1,6 @@
 # Solidity API
 
-## IPancakeV3Factory
+## ISectaDexFactory
 
 The SectaFi Dex Factory facilitates creation of SectaFi Dex pools and control over the protocol fees
 

@@ -6,9 +6,9 @@ import fs from 'fs'
 type ContractJson = { abi: any; bytecode: string }
 const artifacts: { [name: string]: ContractJson } = {
   // eslint-disable-next-line global-require
-  PancakeV3PoolDeployer: require('../artifacts/contracts/PancakeV3PoolDeployer.sol/PancakeV3PoolDeployer.json'),
+  SectaDexPoolDeployer: require('../artifacts/contracts/SectaDexPoolDeployer.sol/SectaDexPoolDeployer.json'),
   // eslint-disable-next-line global-require
-  PancakeV3Factory: require('../artifacts/contracts/PancakeV3Factory.sol/PancakeV3Factory.json'),
+  SectaDexFactory: require('../artifacts/contracts/SectaDexFactory.sol/SectaDexFactory.json'),
 }
 
 async function main() {
@@ -18,20 +18,20 @@ async function main() {
 
   let sectaDexPoolDeployer_address = ''
   let sectaDexPoolDeployer
-  const PancakeV3PoolDeployer = new ContractFactory(
-    artifacts.PancakeV3PoolDeployer.abi,
-    artifacts.PancakeV3PoolDeployer.bytecode,
+  const SectaDexPoolDeployer = new ContractFactory(
+    artifacts.SectaDexPoolDeployer.abi,
+    artifacts.SectaDexPoolDeployer.bytecode,
     owner
   )
   if (!sectaDexPoolDeployer_address) {
-    sectaDexPoolDeployer = await PancakeV3PoolDeployer.deploy()
+    sectaDexPoolDeployer = await SectaDexPoolDeployer.deploy()
 
     sectaDexPoolDeployer_address = sectaDexPoolDeployer.address
     console.log('sectaDexPoolDeployer', sectaDexPoolDeployer_address)
   } else {
     sectaDexPoolDeployer = new ethers.Contract(
       sectaDexPoolDeployer_address,
-      artifacts.PancakeV3PoolDeployer.abi,
+      artifacts.SectaDexPoolDeployer.abi,
       owner
     )
   }
@@ -39,17 +39,17 @@ async function main() {
   let sectaDexFactory_address = ''
   let sectaDexFactory
   if (!sectaDexFactory_address) {
-    const PancakeV3Factory = new ContractFactory(
-      artifacts.PancakeV3Factory.abi,
-      artifacts.PancakeV3Factory.bytecode,
+    const SectaDexFactory = new ContractFactory(
+      artifacts.SectaDexFactory.abi,
+      artifacts.SectaDexFactory.bytecode,
       owner
     )
-    sectaDexFactory = await PancakeV3Factory.deploy(sectaDexPoolDeployer_address)
+    sectaDexFactory = await SectaDexFactory.deploy(sectaDexPoolDeployer_address)
 
     sectaDexFactory_address = sectaDexFactory.address
     console.log('sectaDexFactory', sectaDexFactory_address)
   } else {
-    sectaDexFactory = new ethers.Contract(sectaDexFactory_address, artifacts.PancakeV3Factory.abi, owner)
+    sectaDexFactory = new ethers.Contract(sectaDexFactory_address, artifacts.SectaDexFactory.abi, owner)
   }
 
   // Set FactoryAddress for sectaDexPoolDeployer.
@@ -57,8 +57,8 @@ async function main() {
 
 
   const contracts = {
-    PancakeV3Factory: sectaDexFactory_address,
-    PancakeV3PoolDeployer: sectaDexPoolDeployer_address,
+    SectaDexFactory: sectaDexFactory_address,
+    SectaDexPoolDeployer: sectaDexPoolDeployer_address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

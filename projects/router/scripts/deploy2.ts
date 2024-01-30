@@ -14,8 +14,8 @@ async function main() {
   const v3DeployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
   const v3PeripheryDeployedContracts = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
 
-  const sectaDexPoolDeployer_address = v3DeployedContracts.PancakeV3PoolDeployer
-  const sectaDexFactory_address = v3DeployedContracts.PancakeV3Factory
+  const sectaDexPoolDeployer_address = v3DeployedContracts.SectaDexPoolDeployer
+  const sectaDexFactory_address = v3DeployedContracts.SectaDexFactory
   const positionManager_address = v3PeripheryDeployedContracts.NonfungiblePositionManager
 
   /** SmartRouterHelper */

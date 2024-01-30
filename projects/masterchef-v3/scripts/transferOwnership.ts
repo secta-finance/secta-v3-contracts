@@ -110,7 +110,7 @@ const abi = [
       },
       {
         indexed: true,
-        internalType: "contract IPancakeV3Pool",
+        internalType: "contract ISectaDexPool",
         name: "v3Pool",
         type: "address",
       },
@@ -593,7 +593,7 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IPancakeV3Pool",
+        internalType: "contract ISectaDexPool",
         name: "_v3Pool",
         type: "address",
       },
@@ -1056,7 +1056,7 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IPancakeV3Pool",
+        internalType: "contract ISectaDexPool",
         name: "v3Pool",
         type: "address",
       },

@@ -15,8 +15,8 @@ async function main() {
   // Verify swapRouter
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_v3_periphery.SwapRouter, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
   ])
   await sleep(10000)
@@ -29,8 +29,8 @@ async function main() {
   // Verify NonfungiblePositionManager
   console.log('Verify NonfungiblePositionManager')
   await verifyContract(deployedContracts_v3_periphery.NonfungiblePositionManager, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
     deployedContracts_v3_periphery.NonfungibleTokenPositionDescriptor,
   ])
@@ -49,8 +49,8 @@ async function main() {
   // Verify QuoterV2
   console.log('Verify QuoterV2')
   await verifyContract(deployedContracts_v3_periphery.QuoterV2, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
   ])
   await sleep(10000)

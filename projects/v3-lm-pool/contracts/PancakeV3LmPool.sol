@@ -5,14 +5,14 @@ import '@sectafi/v3-core/contracts/libraries/LowGasSafeMath.sol';
 import '@sectafi/v3-core/contracts/libraries/SafeCast.sol';
 import '@sectafi/v3-core/contracts/libraries/FullMath.sol';
 import '@sectafi/v3-core/contracts/libraries/FixedPoint128.sol';
-import '@sectafi/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
 
 import './libraries/LmTick.sol';
 
-import './interfaces/IPancakeV3LmPool.sol';
+import './interfaces/ISectaDexLmPool.sol';
 import './interfaces/IMasterChefV3.sol';
 
-contract PancakeV3LmPool is IPancakeV3LmPool {
+contract SectaDexLmPool is ISectaDexLmPool {
   using LowGasSafeMath for uint256;
   using LowGasSafeMath for int256;
   using SafeCast for uint256;
@@ -21,7 +21,7 @@ contract PancakeV3LmPool is IPancakeV3LmPool {
 
   uint256 public constant REWARD_PRECISION = 1e12;
 
-  IPancakeV3Pool public immutable pool;
+  ISectaDexPool public immutable pool;
   IMasterChefV3 public immutable masterChef;
 
   uint256 public rewardGrowthGlobalX128;
@@ -48,7 +48,7 @@ contract PancakeV3LmPool is IPancakeV3LmPool {
   }
 
   constructor(address _pool, address _masterChef, uint32 rewardStartTimestamp) {
-    pool = IPancakeV3Pool(_pool);
+    pool = ISectaDexPool(_pool);
     masterChef = IMasterChefV3(_masterChef);
     lastRewardTimestamp = rewardStartTimestamp;
   }

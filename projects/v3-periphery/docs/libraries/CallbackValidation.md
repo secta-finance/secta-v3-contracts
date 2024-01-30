@@ -7,7 +7,7 @@ Provides validation for callbacks from SectaFi Dex Pools
 ### verifyCallback
 
 ```solidity
-function verifyCallback(address deployer, address tokenA, address tokenB, uint24 fee) internal view returns (contract IPancakeV3Pool pool)
+function verifyCallback(address deployer, address tokenA, address tokenB, uint24 fee) internal view returns (contract ISectaDexPool pool)
 ```
 
 Returns the address of a valid SectaFi Dex Pool
@@ -25,12 +25,12 @@ Returns the address of a valid SectaFi Dex Pool
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| pool | contract IPancakeV3Pool | The V3 pool contract address |
+| pool | contract ISectaDexPool | The V3 pool contract address |
 
 ### verifyCallback
 
 ```solidity
-function verifyCallback(address deployer, struct PoolAddress.PoolKey poolKey) internal view returns (contract IPancakeV3Pool pool)
+function verifyCallback(address deployer, struct PoolAddress.PoolKey poolKey) internal view returns (contract ISectaDexPool pool)
 ```
 
 Returns the address of a valid SectaFi Dex Pool
@@ -46,5 +46,5 @@ Returns the address of a valid SectaFi Dex Pool
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| pool | contract IPancakeV3Pool | The V3 pool contract address |
+| pool | contract ISectaDexPool | The V3 pool contract address |
 

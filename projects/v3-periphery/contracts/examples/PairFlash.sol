@@ -2,7 +2,7 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@sectafi/v3-core/contracts/interfaces/callback/IPancakeV3FlashCallback.sol';
+import '@sectafi/v3-core/contracts/interfaces/callback/ISectaDexFlashCallback.sol';
 import '@sectafi/v3-core/contracts/libraries/LowGasSafeMath.sol';
 
 import '../base/PeripheryPayments.sol';
@@ -14,7 +14,7 @@ import '../interfaces/ISwapRouter.sol';
 
 /// @title Flash contract implementation
 /// @notice An example contract using the SectaFi Dex flash function
-contract PairFlash is IPancakeV3FlashCallback, PeripheryPayments {
+contract PairFlash is ISectaDexFlashCallback, PeripheryPayments {
     using LowGasSafeMath for uint256;
     using LowGasSafeMath for int256;
 
@@ -121,11 +121,11 @@ contract PairFlash is IPancakeV3FlashCallback, PeripheryPayments {
     }
 
     /// @param params The parameters necessary for flash and the callback, passed in as FlashParams
-    /// @notice Calls the pools flash function with data needed in `PancakeV3FlashCallback`
+    /// @notice Calls the pools flash function with data needed in `SectaDexFlashCallback`
     function initFlash(FlashParams memory params) external {
         PoolAddress.PoolKey memory poolKey =
             PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee1});
-        IPancakeV3Pool pool = IPancakeV3Pool(PoolAddress.computeAddress(deployer, poolKey));
+        ISectaDexPool pool = ISectaDexPool(PoolAddress.computeAddress(deployer, poolKey));
         // recipient of borrowed amounts
         // amount of token0 requested to borrow
         // amount of token1 requested to borrow

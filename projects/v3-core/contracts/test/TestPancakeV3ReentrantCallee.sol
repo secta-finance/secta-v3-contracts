@@ -3,15 +3,15 @@ pragma solidity =0.7.6;
 
 import '../libraries/TickMath.sol';
 
-import '../interfaces/callback/IPancakeV3SwapCallback.sol';
+import '../interfaces/callback/ISectaDexSwapCallback.sol';
 
-import '../interfaces/IPancakeV3Pool.sol';
+import '../interfaces/ISectaDexPool.sol';
 
-contract TestPancakeV3ReentrantCallee is IPancakeV3SwapCallback {
+contract TestSectaDexReentrantCallee is ISectaDexSwapCallback {
     string private constant expectedReason = 'LOK';
 
     function swapToReenter(address pool) external {
-        IPancakeV3Pool(pool).swap(address(0), false, 1, TickMath.MAX_SQRT_RATIO - 1, new bytes(0));
+        ISectaDexPool(pool).swap(address(0), false, 1, TickMath.MAX_SQRT_RATIO - 1, new bytes(0));
     }
 
     function sectaDexSwapCallback(
@@ -20,34 +20,34 @@ contract TestPancakeV3ReentrantCallee is IPancakeV3SwapCallback {
         bytes calldata
     ) external override {
         // try to reenter swap
-        try IPancakeV3Pool(msg.sender).swap(address(0), false, 1, 0, new bytes(0)) {} catch Error(
+        try ISectaDexPool(msg.sender).swap(address(0), false, 1, 0, new bytes(0)) {} catch Error(
             string memory reason
         ) {
             require(keccak256(abi.encode(reason)) == keccak256(abi.encode(expectedReason)));
         }
 
         // try to reenter mint
-        try IPancakeV3Pool(msg.sender).mint(address(0), 0, 0, 0, new bytes(0)) {} catch Error(string memory reason) {
+        try ISectaDexPool(msg.sender).mint(address(0), 0, 0, 0, new bytes(0)) {} catch Error(string memory reason) {
             require(keccak256(abi.encode(reason)) == keccak256(abi.encode(expectedReason)));
         }
 
         // try to reenter collect
-        try IPancakeV3Pool(msg.sender).collect(address(0), 0, 0, 0, 0) {} catch Error(string memory reason) {
+        try ISectaDexPool(msg.sender).collect(address(0), 0, 0, 0, 0) {} catch Error(string memory reason) {
             require(keccak256(abi.encode(reason)) == keccak256(abi.encode(expectedReason)));
         }
 
         // try to reenter burn
-        try IPancakeV3Pool(msg.sender).burn(0, 0, 0) {} catch Error(string memory reason) {
+        try ISectaDexPool(msg.sender).burn(0, 0, 0) {} catch Error(string memory reason) {
             require(keccak256(abi.encode(reason)) == keccak256(abi.encode(expectedReason)));
         }
 
         // try to reenter flash
-        try IPancakeV3Pool(msg.sender).flash(address(0), 0, 0, new bytes(0)) {} catch Error(string memory reason) {
+        try ISectaDexPool(msg.sender).flash(address(0), 0, 0, new bytes(0)) {} catch Error(string memory reason) {
             require(keccak256(abi.encode(reason)) == keccak256(abi.encode(expectedReason)));
         }
 
         // try to reenter collectProtocol
-        try IPancakeV3Pool(msg.sender).collectProtocol(address(0), 0, 0) {} catch Error(string memory reason) {
+        try ISectaDexPool(msg.sender).collectProtocol(address(0), 0, 0) {} catch Error(string memory reason) {
             require(keccak256(abi.encode(reason)) == keccak256(abi.encode(expectedReason)));
         }
 

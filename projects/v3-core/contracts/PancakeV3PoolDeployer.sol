@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import './interfaces/IPancakeV3PoolDeployer.sol';
+import './interfaces/ISectaDexPoolDeployer.sol';
 
-import './PancakeV3Pool.sol';
+import './SectaDexPool.sol';
 
-contract PancakeV3PoolDeployer is IPancakeV3PoolDeployer {
+contract SectaDexPoolDeployer is ISectaDexPoolDeployer {
     struct Parameters {
         address factory;
         address token0;
@@ -14,7 +14,7 @@ contract PancakeV3PoolDeployer is IPancakeV3PoolDeployer {
         int24 tickSpacing;
     }
 
-    /// @inheritdoc IPancakeV3PoolDeployer
+    /// @inheritdoc ISectaDexPoolDeployer
     Parameters public override parameters;
 
     address public factoryAddress;
@@ -50,7 +50,7 @@ contract PancakeV3PoolDeployer is IPancakeV3PoolDeployer {
         int24 tickSpacing
     ) external override onlyFactory returns (address pool) {
         parameters = Parameters({factory: factory, token0: token0, token1: token1, fee: fee, tickSpacing: tickSpacing});
-        pool = address(new PancakeV3Pool{salt: keccak256(abi.encode(token0, token1, fee))}());
+        pool = address(new SectaDexPool{salt: keccak256(abi.encode(token0, token1, fee))}());
         delete parameters;
     }
 }

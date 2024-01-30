@@ -14,7 +14,7 @@ async function main() {
 
   // Verify sectaDexLmPoolDeployer
   console.log('Verify sectaDexLmPoolDeployer')
-  await verifyContract(deployedContracts_v3_lm_pool.PancakeV3LmPoolDeployer, [
+  await verifyContract(deployedContracts_v3_lm_pool.SectaDexLmPoolDeployer, [
     deployedContracts_masterchef_v3.MasterChefV3,
   ])
   await sleep(10000)

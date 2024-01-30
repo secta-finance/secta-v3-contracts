@@ -2,7 +2,7 @@ import { ethers, network } from 'hardhat'
 import { configs } from '@sectafi/common/config'
 import { tryVerify } from '@sectafi/common/verify'
 import fs from 'fs'
-import { abi } from '@sectafi/v3-core/artifacts/contracts/PancakeV3Factory.sol/PancakeV3Factory.json'
+import { abi } from '@sectafi/v3-core/artifacts/contracts/SectaDexFactory.sol/SectaDexFactory.json'
 
 import { parseEther } from 'ethers/lib/utils'
 const currentNetwork = network.name
@@ -19,10 +19,10 @@ async function main() {
   const v3DeployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
   const mcV3DeployedContracts = await import(`@sectafi/masterchef-v3/deployments/${networkName}.json`)
 
-  const sectaDexFactory_address = v3DeployedContracts.PancakeV3Factory
+  const sectaDexFactory_address = v3DeployedContracts.SectaDexFactory
 
-  const PancakeV3LmPoolDeployer = await ethers.getContractFactory('PancakeV3LmPoolDeployer')
-  const sectaDexLmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
+  const SectaDexLmPoolDeployer = await ethers.getContractFactory('SectaDexLmPoolDeployer')
+  const sectaDexLmPoolDeployer = await SectaDexLmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
 
   console.log('sectaDexLmPoolDeployer deployed to:', sectaDexLmPoolDeployer.address)
 
@@ -31,7 +31,7 @@ async function main() {
   await sectaDexFactory.setLmPoolDeployer(sectaDexLmPoolDeployer.address)
 
   const contracts = {
-    PancakeV3LmPoolDeployer: sectaDexLmPoolDeployer.address,
+    SectaDexLmPoolDeployer: sectaDexLmPoolDeployer.address,
   }
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))
 }

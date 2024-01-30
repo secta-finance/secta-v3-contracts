@@ -1,6 +1,6 @@
 # Solidity API
 
-## IPancakeV3PoolEvents
+## ISectaDexPoolEvents
 
 Contains all events emitted by the pool
 
