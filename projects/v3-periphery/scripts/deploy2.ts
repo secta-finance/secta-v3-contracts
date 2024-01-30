@@ -160,10 +160,10 @@ async function main() {
     owner
   )
 
-  const pancakeInterfaceMulticall = await PancakeInterfaceMulticall.deploy()
-  console.log('PancakeInterfaceMulticall', pancakeInterfaceMulticall.address)
+  const sectaInterfaceMulticall = await PancakeInterfaceMulticall.deploy()
+  console.log('PancakeInterfaceMulticall', sectaInterfaceMulticall.address)
 
-  // await tryVerify(pancakeInterfaceMulticall)
+  // await tryVerify(sectaInterfaceMulticall)
 
   const TickLens = new ContractFactory(artifacts.TickLens.abi, artifacts.TickLens.bytecode, owner)
   const tickLens = await TickLens.deploy()
@@ -185,7 +185,7 @@ async function main() {
     // NFTDescriptorEx: nftDescriptorEx.address,
     NonfungibleTokenPositionDescriptor: nonfungibleTokenPositionDescriptor.address,
     NonfungiblePositionManager: nonfungiblePositionManager.address,
-    PancakeInterfaceMulticall: pancakeInterfaceMulticall.address,
+    PancakeInterfaceMulticall: sectaInterfaceMulticall.address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

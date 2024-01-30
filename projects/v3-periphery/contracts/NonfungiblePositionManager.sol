@@ -30,7 +30,7 @@ contract NonfungiblePositionManager is
     PeripheryValidation,
     SelfPermit
 {
-    // details about the pancake position
+    // details about the secta position
     struct Position {
         // the nonce for permits
         uint96 nonce;

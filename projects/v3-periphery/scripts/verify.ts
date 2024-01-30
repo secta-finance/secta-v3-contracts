@@ -36,8 +36,8 @@ async function main() {
   ])
   await sleep(10000)
 
-  // Verify pancakeInterfaceMulticall
-  console.log('Verify pancakeInterfaceMulticall')
+  // Verify sectaInterfaceMulticall
+  console.log('Verify sectaInterfaceMulticall')
   await verifyContract(deployedContracts_v3_periphery.PancakeInterfaceMulticall)
   await sleep(10000)
 
