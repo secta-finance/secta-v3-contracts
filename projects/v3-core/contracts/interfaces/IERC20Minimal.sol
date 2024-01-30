@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-/// @title Minimal ERC20 interface for PancakeSwap
+/// @title Minimal ERC20 interface for SectaFi
 /// @notice Contains a subset of the full ERC20 interface that is used in SectaFi Dex
 interface IERC20Minimal {
     /// @notice Returns the balance of a token
