@@ -1,6 +1,6 @@
-# PancakeSwap V3
+# SectaFi Dex
 
-This repository contains the core smart contracts for the PancakeSwap V3 Protocol.
+This repository contains the core smart contracts for the SectaFi Dex Protocol.
 For higher level contracts, see the [v3-periphery](../v3-periphery/)
 repository.
 
@@ -27,7 +27,7 @@ your local deployment.
 
 ## Using solidity interfaces
 
-The PancakeSwap v3 interfaces are available for import into solidity smart contracts
+The SectaFi Dex interfaces are available for import into solidity smart contracts
 via the npm artifact `@sectafi/v3-core`, e.g.:
 
 ```solidity

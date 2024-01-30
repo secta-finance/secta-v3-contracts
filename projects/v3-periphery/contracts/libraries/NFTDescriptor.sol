@@ -112,7 +112,7 @@ library NFTDescriptor {
         return
             string(
                 abi.encodePacked(
-                    'This NFT represents a liquidity position in a PancakeSwap V3 ',
+                    'This NFT represents a liquidity position in a SectaFi Dex ',
                     quoteTokenSymbol,
                     '-',
                     baseTokenSymbol,

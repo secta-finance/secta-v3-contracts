@@ -1,6 +1,6 @@
 {
   "name": "@sectafi/v3-periphery",
-  "description": "🎚 Peripheral smart contracts for interacting with PancakeSwap V3",
+  "description": "🎚 Peripheral smart contracts for interacting with SectaFi Dex",
   "license": "GPL-2.0-or-later",
   "publishConfig": {
     "access": "public"

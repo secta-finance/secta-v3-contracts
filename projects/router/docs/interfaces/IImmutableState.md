@@ -14,5 +14,5 @@ function positionManager() external view returns (address)
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | address | Returns the address of PancakeSwap V3 NFT position manager |
+| [0] | address | Returns the address of SectaFi Dex NFT position manager |
 

@@ -151,7 +151,7 @@ _Deploys a LmPool_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| pool | contract IPancakeV3Pool | The contract address of the PancakeSwap V3 pool |
+| pool | contract IPancakeV3Pool | The contract address of the SectaFi Dex pool |
 
 ## IPancakeV3LmPool
 

@@ -2,7 +2,7 @@
 
 ## PairFlash
 
-An example contract using the PancakeSwap V3 flash function
+An example contract using the SectaFi Dex flash function
 
 ### swapRouter
 

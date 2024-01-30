@@ -2,7 +2,7 @@
 
 ## LiquidityManagement
 
-Internal functions for safely managing liquidity in PancakeSwap V3
+Internal functions for safely managing liquidity in SectaFi Dex
 
 ### MintCallbackData
 

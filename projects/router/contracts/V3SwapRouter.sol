@@ -14,8 +14,8 @@ import './base/OracleSlippage.sol';
 import './libraries/Constants.sol';
 import './libraries/SmartRouterHelper.sol';
 
-/// @title PancakeSwap V3 Swap Router
-/// @notice Router for stateless execution of swaps against PancakeSwap V3
+/// @title SectaFi Dex Swap Router
+/// @notice Router for stateless execution of swaps against SectaFi Dex
 abstract contract V3SwapRouter is IV3SwapRouter, PeripheryPaymentsWithFeeExtended, OracleSlippage, ReentrancyGuard {
     using Path for bytes;
     using SafeCast for uint256;
