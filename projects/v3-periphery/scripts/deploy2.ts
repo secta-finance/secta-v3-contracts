@@ -10,7 +10,6 @@ type ContractJson = { abi: any; bytecode: string }
 const artifacts: { [name: string]: ContractJson } = {
   QuoterV2: require('../artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json'),
   TickLens: require('../artifacts/contracts/lens/TickLens.sol/TickLens.json'),
-  V3Migrator: require('../artifacts/contracts/V3Migrator.sol/V3Migrator.json'),
   PancakeInterfaceMulticall: require('../artifacts/contracts/lens/PancakeInterfaceMulticall.sol/PancakeInterfaceMulticall.json'),
   // eslint-disable-next-line global-require
   SwapRouter: require('../artifacts/contracts/SwapRouter.sol/SwapRouter.json'),
@@ -166,22 +165,6 @@ async function main() {
 
   // await tryVerify(pancakeInterfaceMulticall)
 
-  const V3Migrator = new ContractFactory(artifacts.V3Migrator.abi, artifacts.V3Migrator.bytecode, owner)
-  const v3Migrator = await V3Migrator.deploy(
-    pancakeV3PoolDeployer_address,
-    pancakeV3Factory_address,
-    config.WNATIVE,
-    nonfungiblePositionManager.address
-  )
-  console.log('V3Migrator', v3Migrator.address)
-
-  // await tryVerify(v3Migrator, [
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
-  //   config.WNATIVE,
-  //   nonfungiblePositionManager.address,
-  // ])
-
   const TickLens = new ContractFactory(artifacts.TickLens.abi, artifacts.TickLens.bytecode, owner)
   const tickLens = await TickLens.deploy()
   console.log('TickLens', tickLens.address)
@@ -196,7 +179,6 @@ async function main() {
 
   const contracts = {
     SwapRouter: swapRouter.address,
-    V3Migrator: v3Migrator.address,
     QuoterV2: quoterV2.address,
     TickLens: tickLens.address,
     // NFTDescriptor: nftDescriptor.address,

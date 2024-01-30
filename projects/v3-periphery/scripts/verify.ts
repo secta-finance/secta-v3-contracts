@@ -41,16 +41,6 @@ async function main() {
   await verifyContract(deployedContracts_v3_periphery.PancakeInterfaceMulticall)
   await sleep(10000)
 
-  // Verify v3Migrator
-  console.log('Verify v3Migrator')
-  await verifyContract(deployedContracts_v3_periphery.V3Migrator, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
-    config.WNATIVE,
-    deployedContracts_v3_periphery.NonfungiblePositionManager,
-  ])
-  await sleep(10000)
-
   // Verify tickLens
   console.log('Verify tickLens')
   await verifyContract(deployedContracts_v3_periphery.TickLens)
