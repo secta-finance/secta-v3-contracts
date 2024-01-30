@@ -1,5 +1,5 @@
 {
-  "name": "pancake-v3",
+  "name": "sectafi-v1",
   "private": true,
   "workspaces": [
     "projects/*",

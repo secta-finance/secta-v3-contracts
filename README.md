@@ -1,4 +1,4 @@
-# Pancake V3
+# Secta V3
 
 
 ## Deployments
