@@ -2,10 +2,8 @@
 // import 'zx/globals'
 
 const networks = {
-  eth: 'eth',
-  goerli: 'goerli',
-  bscMainnet: 'bscMainnet',
-  bscTestnet: 'bscTestnet',
+  linea: 'linea',
+  lineaGoerli: 'linaeGoerli',
   hardhat: 'hardhat',
 }
 

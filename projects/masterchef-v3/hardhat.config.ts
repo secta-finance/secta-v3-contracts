@@ -14,40 +14,24 @@ import "dotenv/config";
 
 require("dotenv").config({ path: require("find-config")(".env") });
 
-const bscTestnet: NetworkUserConfig = {
-  url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-  chainId: 97,
+const lineaGoerli: NetworkUserConfig = {
+  url: "https://linea-testnet.rpc.thirdweb.com/",
+  chainId: 59140,
   accounts: [process.env.KEY_TESTNET!],
 };
 
-const bscMainnet: NetworkUserConfig = {
-  url: "https://bsc-dataseed.binance.org/",
-  chainId: 56,
+const linea: NetworkUserConfig = {
+  url: "https://linea.rpc.thirdweb.com/",
+  chainId: 59144,
   accounts: [process.env.KEY_MAINNET!],
-};
-
-const goerli: NetworkUserConfig = {
-  url: "https://rpc.ankr.com/eth_goerli",
-  chainId: 5,
-  accounts: [process.env.KEY_GOERLI!],
-};
-
-const eth: NetworkUserConfig = {
-  url: "https://eth.llamarpc.com",
-  chainId: 1,
-  accounts: [process.env.KEY_ETH!],
 };
 
 const config = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
-    ...(process.env.KEY_TESTNET && { bscTestnet }),
-    ...(process.env.KEY_MAINNET && { bscMainnet }),
-    ...(process.env.KEY_GOERLI && { goerli }),
-    ...(process.env.KEY_ETH && { eth }),
-    // testnet: bscTestnet,
-    // mainnet: bscMainnet,
+    ...(process.env.KEY_TESTNET && { lineaGoerli }),
+    ...(process.env.KEY_MAINNET && { linea }),
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
