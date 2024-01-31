@@ -3,7 +3,7 @@
 
 const networks = {
   linea: 'linea',
-  lineaGoerli: 'linaeGoerli',
+  lineaGoerli: 'lineaGoerli',
   hardhat: 'hardhat',
 }
 
