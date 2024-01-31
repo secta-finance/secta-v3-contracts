@@ -21,12 +21,9 @@ async function main() {
   // Verify swapRouter
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_smart_router.SmartRouter, [
-    config.v2Factory,
     deployedContracts_v3_core.SectaDexPoolDeployer,
     deployedContracts_v3_core.SectaDexFactory,
     deployedContracts_v3_periphery.NonfungiblePositionManager,
-    config.stableFactory,
-    config.stableInfo,
     config.WNATIVE,
   ])
   await sleep(10000)
