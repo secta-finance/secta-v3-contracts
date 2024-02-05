@@ -2,7 +2,7 @@
 
 ## NonfungiblePositionManager
 
-Wraps Secta V3 positions in the ERC721 non-fungible token interface
+Wraps Secta Dex positions in the ERC721 non-fungible token interface
 
 ### Position
 

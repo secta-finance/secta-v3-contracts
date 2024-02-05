@@ -1,4 +1,4 @@
-# Secta V3
+# Secta Finance
 
 
 ## Deployments

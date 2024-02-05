@@ -17,8 +17,8 @@ import './libraries/PoolAddress.sol';
 import './libraries/CallbackValidation.sol';
 import './interfaces/external/IWETH9.sol';
 
-/// @title Secta V3 Swap Router
-/// @notice Router for stateless execution of swaps against Secta V3
+/// @title Secta Dex Swap Router
+/// @notice Router for stateless execution of swaps against Secta Dex
 contract SwapRouter is
     ISwapRouter,
     PeripheryImmutableState,
