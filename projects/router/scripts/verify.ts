@@ -36,6 +36,15 @@ async function main() {
     config.WNATIVE,
   ])
   await sleep(10000)
+
+  // Verify mixedRouteQuoterV1
+  console.log('Verify mixedRouteQuoterV1')
+  await verifyContract(deployedContracts_smart_router.MixedRouteQuoterV1, [
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
+    config.WNATIVE,
+  ])
+  await sleep(10000)
 }
 
 main()

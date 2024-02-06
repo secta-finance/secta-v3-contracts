@@ -61,10 +61,26 @@ async function main() {
 
   // await tryVerify(quoterV2, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
 
+  /** MixedRouteQuoterV1 */
+  const MixedRouteQuoterV1 = await ethers.getContractFactory('MixedRouteQuoterV1', {
+    libraries: {
+      SmartRouterHelper: smartRouterHelper.address,
+    },
+  })
+  const mixedRouteQuoterV1 = await MixedRouteQuoterV1.deploy(
+    sectaDexPoolDeployer_address,
+    sectaDexFactory_address,
+    config.WNATIVE
+  )
+  console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1.address)
+
+  // await tryVerify(mixedRouteQuoterV1, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
+
   const contracts = {
     SmartRouter: smartRouter.address,
     SmartRouterHelper: smartRouterHelper.address,
     QuoterV2: quoterV2.address,
+    MixedRouteQuoterV1: mixedRouteQuoterV1.address,
   }
 
   writeFileSync(`./deployments/${network.name}.json`, JSON.stringify(contracts, null, 2))
