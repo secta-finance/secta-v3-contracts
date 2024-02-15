@@ -10,7 +10,9 @@ library SmartRouterHelper {
 
     /************************************************** V3 **************************************************/
 
-    // f*ck!
+    /// @notice hash of init code of V3 Pool, used to calculate pool address deployed using CREATE2.
+    /// See `computeAddress` below for more info.
+    /// Run `projects/v3-core/scripts/computeV3InitCodeHash.ts` to get this value.
     bytes32 internal constant V3_INIT_CODE_HASH = 0x0ba76f1ed1c86d77276a345eb00b5d03ff37ba4ad394b97c92daeca1a223062b;
 
     /// @notice The identifying key of the pool
