@@ -26,6 +26,8 @@ contract MixedRouteQuoterV1 is IMixedRouteQuoterV1, ISectaDexSwapCallback, Perip
     using SafeCast for uint256;
     using PoolTicksCounter for ISectaDexPool;
 
+    address public immutable factoryV2;
+
     /**
     /// @dev Value to bit mask with path fee to determine if V2 or V3 route
     // max V3 fee:           000011110100001001000000 (24 bits)
@@ -39,9 +41,10 @@ contract MixedRouteQuoterV1 is IMixedRouteQuoterV1, ISectaDexSwapCallback, Perip
     constructor(
         address _deployer,
         address _factory,
+        address _factoryV2,
         address _WETH9
     ) PeripheryImmutableState(_deployer, _factory, _WETH9) {
-
+        factoryV2 = _factoryV2;
     }
 
 
@@ -156,6 +159,20 @@ contract MixedRouteQuoterV1 is IMixedRouteQuoterV1, ISectaDexSwapCallback, Perip
     }
 
 
+    /************************************************** V2 **************************************************/
+
+    /// @dev Fetch an exactIn quote for a V2 pair on chain
+    function quoteExactInputSingleV2(QuoteExactInputSingleV2Params memory params)
+        public
+        view
+        override
+        returns (uint256 amountOut)
+    {
+        (uint256 reserveIn, uint256 reserveOut) = SmartRouterHelper.getReserves(factoryV2, params.tokenIn, params.tokenOut);
+        amountOut = SmartRouterHelper.getAmountOut(params.amountIn, reserveIn, reserveOut);
+    }
+
+
     /************************************************** Mixed **************************************************/
 
     /// @dev Get the quote for an exactIn swap between an array of Stable, V2 and/or V3 pools
@@ -182,8 +199,13 @@ contract MixedRouteQuoterV1 is IMixedRouteQuoterV1, ISectaDexSwapCallback, Perip
             (address tokenIn, address tokenOut, uint24 fee) = path.decodeFirstPool();
 
             if (flag[i] == 1) {
-                // not processing v2
-                amountIn = 0;
+                amountIn = quoteExactInputSingleV2(
+                    QuoteExactInputSingleV2Params({
+                        tokenIn: tokenIn, 
+                        tokenOut: tokenOut, 
+                        amountIn: amountIn
+                    })
+                );
             } else if (flag[i] == 0) {
                 /// the outputs of prior swaps become the inputs to subsequent ones
                 (

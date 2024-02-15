@@ -10,23 +10,33 @@ async function main() {
     throw new Error(`No config found for network ${networkName}`)
   }
 
-  const sectaDexPoolDeployer_address = '0x46FB35d8a26412c64Fb972D838fCBd4ec48EE7b1'
-  const sectaDexFactory_address = '0x591F72F4a2d2C2678B709a38E7ff0a1c86099a8d'
+  const v3DeployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
+
+  const sectaDexPoolDeployer_address = v3DeployedContracts.SectaDexPoolDeployer
+  const sectaDexFactory_address = v3DeployedContracts.SectaDexFactory
+  const sectaFactory_address = '0xa8cDF3a657A3b34D8b410bDBe5457da41C5fd995'
+  const smartRouterHelperAddress = '0x7B11A689bd24694fD0acce53f136664070b4E4aA'
 
   /** MixedRouteQuoterV1 */
   const MixedRouteQuoterV1 = await ethers.getContractFactory('MixedRouteQuoterV1', {
     libraries: {
-      SmartRouterHelper: '0x4C35fA1249a72190fc2e08fd778d0E15E8bcb586',
+      SmartRouterHelper: smartRouterHelperAddress,
     },
   })
   const mixedRouteQuoterV1 = await MixedRouteQuoterV1.deploy(
     sectaDexPoolDeployer_address,
     sectaDexFactory_address,
+    sectaFactory_address,
     config.WNATIVE
   )
   console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1.address)
 
-  await tryVerify(mixedRouteQuoterV1, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
+  await tryVerify(mixedRouteQuoterV1, [
+    sectaDexPoolDeployer_address,
+    sectaDexFactory_address,
+    sectaFactory_address,
+    config.WNATIVE,
+  ])
 }
 
 main()

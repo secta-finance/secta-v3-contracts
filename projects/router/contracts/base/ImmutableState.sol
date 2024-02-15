@@ -7,9 +7,12 @@ import '../interfaces/IImmutableState.sol';
 /// @notice Immutable state used by the swap router
 abstract contract ImmutableState is IImmutableState {
     /// @inheritdoc IImmutableState
+    address public immutable override factoryV2;
+    /// @inheritdoc IImmutableState
     address public immutable override positionManager;
 
-    constructor(address _positionManager) {
+    constructor(address _factoryV2, address _positionManager) {
+        factoryV2 = _factoryV2;
         positionManager = _positionManager;
     }
 }
