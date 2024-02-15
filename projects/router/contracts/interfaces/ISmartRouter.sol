@@ -5,10 +5,11 @@ pragma abicoder v2;
 import '@sectafi/v3-periphery/contracts/interfaces/ISelfPermit.sol';
 
 import './IV3SwapRouter.sol';
+import './IV2SwapRouter.sol';
 import './IApproveAndCall.sol';
 import './IMulticallExtended.sol';
 
 /// @title Router token swapping functionality
-interface ISmartRouter is IV3SwapRouter, IApproveAndCall, IMulticallExtended, ISelfPermit {
+interface ISmartRouter is IV2SwapRouter, IV3SwapRouter, IApproveAndCall, IMulticallExtended, ISelfPermit {
 
 }
