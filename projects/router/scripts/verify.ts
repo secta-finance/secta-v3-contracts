@@ -13,6 +13,8 @@ async function main() {
   const deployedContracts_v3_periphery = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
   const deployedContracts_smart_router = await import(`@sectafi/smart-router/deployments/${networkName}.json`)
 
+  const sectaFactory_address = '0x8Ad39bf99765E24012A28bEb0d444DE612903C43'
+
   // Verify SmartRouterHelper
   console.log('Verify SmartRouterHelper')
   await verifyContract(deployedContracts_smart_router.SmartRouterHelper)
@@ -21,18 +23,10 @@ async function main() {
   // Verify swapRouter
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_smart_router.SmartRouter, [
+    sectaFactory_address,
     deployedContracts_v3_core.SectaDexPoolDeployer,
     deployedContracts_v3_core.SectaDexFactory,
     deployedContracts_v3_periphery.NonfungiblePositionManager,
-    config.WNATIVE,
-  ])
-  await sleep(10000)
-
-  // Verify quoterV2
-  console.log('Verify quoterV2')
-  await verifyContract(deployedContracts_smart_router.QuoterV2, [
-    deployedContracts_v3_core.SectaDexPoolDeployer,
-    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
   ])
   await sleep(10000)
@@ -42,6 +36,7 @@ async function main() {
   await verifyContract(deployedContracts_smart_router.MixedRouteQuoterV1, [
     deployedContracts_v3_core.SectaDexPoolDeployer,
     deployedContracts_v3_core.SectaDexFactory,
+    sectaFactory_address,
     config.WNATIVE,
   ])
   await sleep(10000)

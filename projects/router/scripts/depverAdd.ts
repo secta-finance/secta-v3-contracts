@@ -65,7 +65,12 @@ async function main() {
   )
   console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1.address)
 
-  await tryVerify(mixedRouteQuoterV1, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
+  await tryVerify(mixedRouteQuoterV1, [
+    sectaDexPoolDeployer_address,
+    sectaDexFactory_address,
+    sectaFactory_address,
+    config.WNATIVE,
+  ])
 
   const contracts = {
     SmartRouter: smartRouter.address,
