@@ -7,7 +7,7 @@ async function main() {
   console.log('owner', owner.address)
 
   const NonfungibleTokenPositionDescriptor = await ethers.getContractFactoryFromArtifact(NftDescriptorOffchainArtifact)
-  const baseTokenUri = 'https://nft.sectafi.com/v3/'
+  const baseTokenUri = 'https://nft.secta.finance/'
   const nonfungibleTokenPositionDescriptor = await upgrades.deployProxy(NonfungibleTokenPositionDescriptor, [
     baseTokenUri,
   ])

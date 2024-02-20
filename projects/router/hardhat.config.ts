@@ -2,6 +2,8 @@ import type { HardhatUserConfig, NetworkUserConfig } from 'hardhat/types'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-web3'
 import '@nomiclabs/hardhat-truffle5'
+import '@nomiclabs/hardhat-waffle'
+import '@typechain/hardhat'
 import 'hardhat-abi-exporter'
 import 'hardhat-contract-sizer'
 import 'dotenv/config'
@@ -11,16 +13,16 @@ import 'solidity-docgen'
 require('dotenv').config({ path: require('find-config')('.env') })
 
 const lineaGoerli: NetworkUserConfig = {
-  url: "https://linea-testnet.rpc.thirdweb.com/",
+  url: 'https://linea-testnet.rpc.thirdweb.com/',
   chainId: 59140,
   accounts: [process.env.KEY_TESTNET!],
-};
+}
 
 const linea: NetworkUserConfig = {
-  url: "https://linea.rpc.thirdweb.com/",
+  url: 'https://linea.rpc.thirdweb.com/',
   chainId: 59144,
   accounts: [process.env.KEY_MAINNET!],
-};
+}
 
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
@@ -138,6 +140,10 @@ const config: HardhatUserConfig = {
   // },
   docgen: {
     pages: 'files',
+  },
+  typechain: {
+    outDir: 'typechain',
+    target: 'ethers-v5',
   },
 }
 

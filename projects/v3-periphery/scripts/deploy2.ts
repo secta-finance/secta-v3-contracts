@@ -125,7 +125,7 @@ async function main() {
     artifacts.NonfungibleTokenPositionDescriptorOffChain.bytecode,
     owner
   )
-  const baseTokenUri = 'https://nft.sectafi.com/v3/'
+  const baseTokenUri = 'https://nft.secta.finance/'
   const nonfungibleTokenPositionDescriptor = await upgrades.deployProxy(NonfungibleTokenPositionDescriptor, [
     baseTokenUri,
   ])
