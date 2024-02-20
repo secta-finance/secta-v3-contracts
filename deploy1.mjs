@@ -17,7 +17,7 @@ await $`yarn workspace @sectafi/v3-core run hardhat run scripts/deploy.ts --netw
 
 await $`yarn workspace @sectafi/v3-periphery run hardhat run scripts/deploy2.ts --network ${network}`
 
-await $`yarn workspace @sectafi/smart-router run hardhat run scripts/deploy2.ts --network ${network}`
+await $`yarn workspace @sectafi/smart-router run hardhat run scripts/deployAdd.ts --network ${network}`
 
 console.log(chalk.blue('Done!'))
 

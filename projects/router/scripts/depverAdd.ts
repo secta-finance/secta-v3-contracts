@@ -1,6 +1,7 @@
 import { ethers, network } from 'hardhat'
 import { configs } from '@sectafi/common/config'
 import { tryVerify } from '@sectafi/common/verify'
+import { writeFileSync } from 'fs'
 
 async function main() {
   // Remember to update the init code hash in SC for different chains before deploying
@@ -13,11 +14,11 @@ async function main() {
   const v3DeployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
   const v3PeripheryDeployedContracts = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
 
+  const sectaDexPoolDeployer_address = v3DeployedContracts.SectaDexPoolDeployer
+  const sectaDexFactory_address = v3DeployedContracts.SectaDexFactory
   const positionManager_address = v3PeripheryDeployedContracts.NonfungiblePositionManager
 
-  const sectaDexPoolDeployer_address = '0x46FB35d8a26412c64Fb972D838fCBd4ec48EE7b1'
-  const sectaDexFactory_address = '0x591F72F4a2d2C2678B709a38E7ff0a1c86099a8d'
-  const sectaFactory_address = '0xa8cDF3a657A3b34D8b410bDBe5457da41C5fd995'
+  const sectaFactory_address = '0x8Ad39bf99765E24012A28bEb0d444DE612903C43'
 
   /** SmartRouterHelper */
   console.log('Deploying SmartRouterHelper...')
@@ -65,6 +66,14 @@ async function main() {
   console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1.address)
 
   await tryVerify(mixedRouteQuoterV1, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
+
+  const contracts = {
+    SmartRouter: smartRouter.address,
+    SmartRouterHelper: smartRouterHelper.address,
+    MixedRouteQuoterV1: mixedRouteQuoterV1.address,
+  }
+
+  writeFileSync(`./deployments/${network.name}.json`, JSON.stringify(contracts, null, 2))
 }
 
 main()
