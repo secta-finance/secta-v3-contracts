@@ -33,12 +33,16 @@ async function main() {
 
   // Verify mixedRouteQuoterV1
   console.log('Verify mixedRouteQuoterV1')
-  await verifyContract(deployedContracts_smart_router.MixedRouteQuoterV1, [
-    deployedContracts_v3_core.SectaDexPoolDeployer,
-    deployedContracts_v3_core.SectaDexFactory,
-    sectaFactory_address,
-    config.WNATIVE,
-  ])
+  await verifyContract(
+    deployedContracts_smart_router.MixedRouteQuoterV1,
+    [
+      deployedContracts_v3_core.SectaDexPoolDeployer,
+      deployedContracts_v3_core.SectaDexFactory,
+      sectaFactory_address,
+      config.WNATIVE,
+    ],
+    { SmartRouterHelper: deployedContracts_smart_router.SmartRouterHelper }
+  )
   await sleep(10000)
 }
 
