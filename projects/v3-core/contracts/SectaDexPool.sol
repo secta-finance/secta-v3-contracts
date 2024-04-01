@@ -25,7 +25,6 @@ import './interfaces/callback/ISectaDexMintCallback.sol';
 import './interfaces/callback/ISectaDexSwapCallback.sol';
 import './interfaces/callback/ISectaDexFlashCallback.sol';
 
-import '@sectafi/v3-lm-pool/contracts/interfaces/ISectaDexLmPool.sol';
 
 contract SectaDexPool is ISectaDexPool {
     using LowGasSafeMath for uint256;
@@ -102,10 +101,6 @@ contract SectaDexPool is ISectaDexPool {
     /// @inheritdoc ISectaDexPoolState
     Oracle.Observation[65535] public override observations;
 
-    // liquidity mining
-    ISectaDexLmPool public lmPool;
-
-    event SetLmPoolEvent(address addr);
 
     /// @dev Mutually exclusive reentrancy protection into the pool to/from a method. This method also prevents entrance
     /// to a function before the pool is initialized. The reentrancy guard is required throughout the contract because
@@ -644,10 +639,6 @@ contract SectaDexPool is ISectaDexPool {
             computedLatestObservation: false
         });
 
-        if (address(lmPool) != address(0)) {
-          lmPool.accumulateReward(cache.blockTimestamp);
-        }
-
         bool exactInput = amountSpecified > 0;
 
         SwapState memory state = SwapState({
@@ -728,10 +719,6 @@ contract SectaDexPool is ISectaDexPool {
                             slot0Start.observationCardinality
                         );
                         cache.computedLatestObservation = true;
-                    }
-
-                    if (address(lmPool) != address(0)) {
-                      lmPool.crossLmTick(step.tickNext, zeroForOne);
                     }
 
                     int128 liquidityNet = ticks.cross(
@@ -899,8 +886,4 @@ contract SectaDexPool is ISectaDexPool {
         emit CollectProtocol(msg.sender, recipient, amount0, amount1);
     }
 
-    function setLmPool(address _lmPool) external override onlyFactoryOrFactoryOwner {
-      lmPool = ISectaDexLmPool(_lmPool);
-      emit SetLmPoolEvent(address(_lmPool));
-    }
 }

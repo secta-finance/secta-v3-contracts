@@ -20,8 +20,8 @@ async function main() {
   await verifyContract(deployedContracts_smart_router.SmartRouterHelper)
   await sleep(10000)
 
-  // Verify swapRouter
-  console.log('Verify swapRouter')
+  // Verify smartRouter
+  console.log('Verify smartRouter')
   await verifyContract(deployedContracts_smart_router.SmartRouter, [
     sectaFactory_address,
     deployedContracts_v3_core.SectaDexPoolDeployer,

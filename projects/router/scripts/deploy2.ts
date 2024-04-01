@@ -32,6 +32,8 @@ async function main() {
       SmartRouterHelper: smartRouterHelper.address,
     },
   })
+
+  // TODO: reflect current implmentation, include v2 factory address
   const smartRouter = await SmartRouter.deploy(
     sectaDexPoolDeployer_address,
     sectaDexFactory_address,
