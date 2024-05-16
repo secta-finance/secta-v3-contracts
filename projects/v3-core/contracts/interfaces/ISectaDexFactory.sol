@@ -119,6 +119,4 @@ interface ISectaDexFactory {
         uint128 amount0Requested,
         uint128 amount1Requested
     ) external returns (uint128 amount0, uint128 amount1);
-
-    function setLmPool(address pool, address lmPool) external;
 }
