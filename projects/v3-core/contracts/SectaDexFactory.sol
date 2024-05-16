@@ -140,8 +140,4 @@ contract SectaDexFactory is ISectaDexFactory {
     ) external override onlyOwner returns (uint128 amount0, uint128 amount1) {
         return ISectaDexPool(pool).collectProtocol(recipient, amount0Requested, amount1Requested);
     }
-
-    function setLmPool(address pool, address lmPool) external override onlyOwnerOrLmPoolDeployer {
-        ISectaDexPool(pool).setLmPool(lmPool);
-    }
 }
