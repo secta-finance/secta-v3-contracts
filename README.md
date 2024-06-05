@@ -36,30 +36,42 @@ Hash
 | v3 |    0x0ba76f1ed1c86d77276a345eb00b5d03ff37ba4ad394b97c92daeca1a223062b   |
 
 
-### Linea Goerli
+### Linea Sepolia
 
 V3
 
 | Contract   |      Address      |
 |----------|:-------------:|
-| SectaDexFactory |  0x591F72F4a2d2C2678B709a38E7ff0a1c86099a8d |
-| SectaDexPoolDeployer |    0x46FB35d8a26412c64Fb972D838fCBd4ec48EE7b1   |
-| SwapRouter | 0x5294273cC7653fF6EbE922CE187957EF98A5E78d |
-| QuoterV2 |    0x92373fd309E8584F7153F82c9ECa705FcDD8ccAa   |
-| TickLens |    0x8C8C05812750fAF276F38fE60894f11452e1937c   |
-| NonfungibleTokenPositionDescriptor |    0xe3B8fB693c69DF9154FD508EbF1D8e5D11BAAFE6   |
-| NonfungiblePositionManager |    0xEA658F4e0B575c5DC9420dE44baB842374FDa258   |
-| SectaInterfaceMulticall |    0x88e38D5Cb5435Ea8761E08c52D32aDB52e468B27   |
-| SmartRouter |    0xf80B9a2501Bc510C14BEb72eC67cAc4dFBd383e3   |
-| SmartRouterHelper |    0x7B11A689bd24694fD0acce53f136664070b4E4aA   |
-| MixedRouteQuoterV1 |    0x286C92c3eC8F4ea75f5F0771792D7863499feE7C   |
+| SectaDexFactory |  0xfD8fbAa34E3efe0Bb4fe11d0468fcFBa8043e9d8 |
+| SectaDexPoolDeployer |    0xBf762932d4f27E84B244f75Bb225ecDd89D7C698   |
+| SwapRouter | 0xFe5fBcE476279a03e869e0AD9d1A898B09892c39 |
+| QuoterV2 |    0x611bdfc91b67782e228bA4C5ce43A01b13DCE484   |
+| TickLens |    0xddBa9aac048b27aFF3CFCa69fb727887F2B189c9   |
+| NonfungibleTokenPositionDescriptor |    0x7ea03B207998d600ba5094905c37591Df3E7C53f   |
+| NonfungiblePositionManager |    0x088C1e45A6C2E3e878Cc0B2392329C641eBe793E   |
+| SectaInterfaceMulticall |    0x6347851AAba00B38AF1Ea1620ea6a51f5EEBBEF1   |
+| SmartRouter |    0x22ab1fd1f5D867C28a9444f08352Cf6a2d4D7397   |
+| SmartRouterHelper |    0x1956405450B02805c23d198854e8E3F8276DB1E9   |
+| MixedRouteQuoterV1 |    0x38C16915a39952aC42326CC9863b2AaBfA1b10ec   |
 
 V2
 
 | Contract   |      Address      |
 |----------|:-------------:|
-| SectaFactory |  0xa8cDF3a657A3b34D8b410bDBe5457da41C5fd995 |
-| SectaRouter |    0x4Fa94465Bc6d82F188DB69Dfa3e5e97A884CCbD8   |
+| SectaFactory |  0x255FfFb718E7Eda171354cb2F3272E88217151E1 |
+| SectaRouter |    0xDF3d02605458c08975Fd5456ed83e6D789146b6a   |
+
+
+IFO
+
+| Contract   |      Address      |
+|----------|:-------------:|
+| SECTA |    0xe54c8b4F6bC9F30A805a16B47635b11061a1a454   |
+| Staking |    0xA9b43fa40E97897D3Ada6B3560833c94cd1b7E5e   |
+| IFODeployerV2 |    0xc7DD5b639561b3c66633DAA3A42a640fD5cA104b   |
+
+
+*WETH: 0x10253594A832f967994b44f33411940533302ACb
 
 
 Hash (same as Linea)
@@ -73,8 +85,8 @@ Hash (same as Linea)
 ## Deployments
 
 1. Add Key in `.env` file. It's a private key of the account that will deploy the contracts and should be gitignored.
-2. Testnet (Linea Goerli) `KEY_TESTNET` or Mainnet (Linea) `KEY_MAINNET`
+2. Testnet (Linea Sepolia) `KEY_TESTNET` or Mainnet (Linea) `KEY_MAINNET`
 3. add `ETHERSCAN_API_KEY` in `.env` file. It's an API key for etherscan.
 4. `yarn` in root directory
-5. `NETWORK=$NETWORK yarn zx main-deploy.mjs` where `$NETWORK` is either `linea`, `lineaGoerli` or `hardhat` (for local testing)
-6. `NETWORK=$NETWORK yarn zx main-verify.mjs` where `$NETWORK` is either `linea`, `lineaGoerli` or `hardhat` (for local testing)
+5. `NETWORK=$NETWORK yarn zx main-deploy.mjs` where `$NETWORK` is either `linea`, `lineaSepolia` or `hardhat` (for local testing)
+6. `NETWORK=$NETWORK yarn zx main-verify.mjs` where `$NETWORK` is either `linea`, `lineaSepolia` or `hardhat` (for local testing)

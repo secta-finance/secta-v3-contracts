@@ -18,14 +18,14 @@ async function main() {
   const sectaDexFactory_address = v3DeployedContracts.SectaDexFactory
   const positionManager_address = v3PeripheryDeployedContracts.NonfungiblePositionManager
 
-  const sectaFactory_address = '0x8Ad39bf99765E24012A28bEb0d444DE612903C43'
+  const sectaFactory_address = '0x255FfFb718E7Eda171354cb2F3272E88217151E1'
 
   /** SmartRouterHelper */
   console.log('Deploying SmartRouterHelper...')
   const SmartRouterHelper = await ethers.getContractFactory('SmartRouterHelper')
   const smartRouterHelper = await SmartRouterHelper.deploy()
   console.log('SmartRouterHelper deployed to:', smartRouterHelper.address)
-  await tryVerify(smartRouterHelper)
+  // await tryVerify(smartRouterHelper)
 
   /** SmartRouter */
   console.log('Deploying SmartRouter...')
@@ -43,13 +43,13 @@ async function main() {
   )
   console.log('SmartRouter deployed to:', smartRouter.address)
 
-  await tryVerify(smartRouter, [
+  /*await tryVerify(smartRouter, [
     sectaFactory_address,
     sectaDexPoolDeployer_address,
     sectaDexFactory_address,
     positionManager_address,
     config.WNATIVE,
-  ])
+  ])*/
 
   /** MixedRouteQuoterV1 */
   const MixedRouteQuoterV1 = await ethers.getContractFactory('MixedRouteQuoterV1', {
@@ -65,12 +65,12 @@ async function main() {
   )
   console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1.address)
 
-  await tryVerify(mixedRouteQuoterV1, [
+  /*await tryVerify(mixedRouteQuoterV1, [
     sectaDexPoolDeployer_address,
     sectaDexFactory_address,
     sectaFactory_address,
     config.WNATIVE,
-  ])
+  ])*/
 
   const contracts = {
     SmartRouter: smartRouter.address,

@@ -11,7 +11,7 @@ library SmartRouterHelper {
 
     /************************************************** V2 **************************************************/
 
-    // Linea Goerli, will stay same for Linea
+    // Linea Sepolia, will stay same for Linea
     bytes32 internal constant V2_INIT_CODE_HASH = 0x5bed5de113e5cdda2845d157bae16c1ce9d8b68c025fe18acf567945ea631cee;
 
     // returns sorted token addresses, used to handle return values from pairs sorted in this order

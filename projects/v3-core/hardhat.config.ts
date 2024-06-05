@@ -50,35 +50,35 @@ const DEFAULT_COMPILER_SETTINGS = {
   },
 }
 
-const lineaGoerli: NetworkUserConfig = {
-  url: "https://linea-testnet.rpc.thirdweb.com/",
-  chainId: 59140,
+const lineaSepolia: NetworkUserConfig = {
+  url: 'https://59141.rpc.thirdweb.com/',
+  chainId: 59141,
   accounts: [process.env.KEY_TESTNET!],
-};
+}
 
 const linea: NetworkUserConfig = {
-  url: "https://linea.rpc.thirdweb.com/",
+  url: 'https://linea.rpc.thirdweb.com/',
   chainId: 59144,
   accounts: [process.env.KEY_MAINNET!],
-};
+}
 
 export default {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: true,
     },
-    ...(process.env.KEY_TESTNET && { lineaGoerli }),
+    ...(process.env.KEY_TESTNET && { lineaSepolia }),
     ...(process.env.KEY_MAINNET && { linea }),
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
     customChains: [
       {
-        network: 'lineaGoerli',
-        chainId: 59140,
+        network: 'lineaSepolia',
+        chainId: 59141,
         urls: {
-          apiURL: 'https://api-testnet.lineascan.build/api',
-          browserURL: 'https://goerli.lineascan.build/',
+          apiURL: 'https://api-sepolia.lineascan.build/api',
+          browserURL: 'https://sepolia.lineascan.build/',
         },
       },
       {

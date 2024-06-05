@@ -2,7 +2,10 @@
   "name": "sectafi-v1",
   "private": true,
   "workspaces": [
-    "projects/*",
+    "projects/v3-core",
+    "projects/v3-periphery",
+    "projects/router",
+    "projects/v3-lm-pool",
     "deployer/*",
     "common"
   ],

@@ -5,10 +5,10 @@ export const configs = {
     nativeCurrencyLabel: 'ETH',
     cake: '0x92ae51D09765f653B3433Df42d5dba1dde0ab039',
   },
-  lineaGoerli: {
-    WNATIVE: '0x2C1b868d6596a18e32E61B901E4060C872647b6C',
-    nativeCurrencyLabel: 'GOR',
-    cake: '0x92ae51D09765f653B3433Df42d5dba1dde0ab039',
+  lineaSepolia: {
+    WNATIVE: '0x10253594A832f967994b44f33411940533302ACb',
+    nativeCurrencyLabel: 'ETH',
+    cake: '0x0000000000000000000000000000000000000000',
   },
   hardhat: {
     WNATIVE: '0x0000000000000000000000000000000000000000',
