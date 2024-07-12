@@ -2,16 +2,15 @@ import bn from 'bignumber.js'
 import { Contract, ContractFactory, utils, BigNumber } from 'ethers'
 import { ethers, upgrades, network } from 'hardhat'
 import { linkLibraries } from '../util/linkLibraries'
-import { tryVerify } from '@pancakeswap/common/verify'
-import { configs } from '@pancakeswap/common/config'
+import { tryVerify } from '@sectafi/common/verify'
+import { configs } from '@sectafi/common/config'
 import fs from 'fs'
 
 type ContractJson = { abi: any; bytecode: string }
 const artifacts: { [name: string]: ContractJson } = {
   QuoterV2: require('../artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json'),
   TickLens: require('../artifacts/contracts/lens/TickLens.sol/TickLens.json'),
-  V3Migrator: require('../artifacts/contracts/V3Migrator.sol/V3Migrator.json'),
-  PancakeInterfaceMulticall: require('../artifacts/contracts/lens/PancakeInterfaceMulticall.sol/PancakeInterfaceMulticall.json'),
+  SectaInterfaceMulticall: require('../artifacts/contracts/lens/SectaInterfaceMulticall.sol/SectaInterfaceMulticall.json'),
   // eslint-disable-next-line global-require
   SwapRouter: require('../artifacts/contracts/SwapRouter.sol/SwapRouter.json'),
   // eslint-disable-next-line global-require
@@ -62,15 +61,15 @@ async function main() {
     throw new Error(`No config found for network ${networkName}`)
   }
 
-  const deployedContracts = await import(`@pancakeswap/v3-core/deployments/${networkName}.json`)
+  const deployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
 
-  const pancakeV3PoolDeployer_address = deployedContracts.PancakeV3PoolDeployer
-  const pancakeV3Factory_address = deployedContracts.PancakeV3Factory
+  const sectaDexPoolDeployer_address = deployedContracts.SectaDexPoolDeployer
+  const sectaDexFactory_address = deployedContracts.SectaDexFactory
 
   const SwapRouter = new ContractFactory(artifacts.SwapRouter.abi, artifacts.SwapRouter.bytecode, owner)
-  const swapRouter = await SwapRouter.deploy(pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE)
+  const swapRouter = await SwapRouter.deploy(sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE)
 
-  // await tryVerify(swapRouter, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
+  // await tryVerify(swapRouter, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
   console.log('swapRouter', swapRouter.address)
 
   // const NFTDescriptor = new ContractFactory(artifacts.NFTDescriptor.abi, artifacts.NFTDescriptor.bytecode, owner)
@@ -126,7 +125,7 @@ async function main() {
     artifacts.NonfungibleTokenPositionDescriptorOffChain.bytecode,
     owner
   )
-  const baseTokenUri = 'https://nft.pancakeswap.com/v3/'
+  const baseTokenUri = 'https://nft.secta.finance/'
   const nonfungibleTokenPositionDescriptor = await upgrades.deployProxy(NonfungibleTokenPositionDescriptor, [
     baseTokenUri,
   ])
@@ -141,46 +140,30 @@ async function main() {
     owner
   )
   const nonfungiblePositionManager = await NonfungiblePositionManager.deploy(
-    pancakeV3PoolDeployer_address,
-    pancakeV3Factory_address,
+    sectaDexPoolDeployer_address,
+    sectaDexFactory_address,
     config.WNATIVE,
     nonfungibleTokenPositionDescriptor.address
   )
 
   // await tryVerify(nonfungiblePositionManager, [
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
+  //   sectaDexPoolDeployer_address,
+  //   sectaDexFactory_address,
   //   config.WNATIVE,
   //   nonfungibleTokenPositionDescriptor.address,
   // ])
   console.log('nonfungiblePositionManager', nonfungiblePositionManager.address)
 
-  const PancakeInterfaceMulticall = new ContractFactory(
-    artifacts.PancakeInterfaceMulticall.abi,
-    artifacts.PancakeInterfaceMulticall.bytecode,
+  const SectaInterfaceMulticall = new ContractFactory(
+    artifacts.SectaInterfaceMulticall.abi,
+    artifacts.SectaInterfaceMulticall.bytecode,
     owner
   )
 
-  const pancakeInterfaceMulticall = await PancakeInterfaceMulticall.deploy()
-  console.log('PancakeInterfaceMulticall', pancakeInterfaceMulticall.address)
+  const sectaInterfaceMulticall = await SectaInterfaceMulticall.deploy()
+  console.log('SectaInterfaceMulticall', sectaInterfaceMulticall.address)
 
-  // await tryVerify(pancakeInterfaceMulticall)
-
-  const V3Migrator = new ContractFactory(artifacts.V3Migrator.abi, artifacts.V3Migrator.bytecode, owner)
-  const v3Migrator = await V3Migrator.deploy(
-    pancakeV3PoolDeployer_address,
-    pancakeV3Factory_address,
-    config.WNATIVE,
-    nonfungiblePositionManager.address
-  )
-  console.log('V3Migrator', v3Migrator.address)
-
-  // await tryVerify(v3Migrator, [
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
-  //   config.WNATIVE,
-  //   nonfungiblePositionManager.address,
-  // ])
+  // await tryVerify(sectaInterfaceMulticall)
 
   const TickLens = new ContractFactory(artifacts.TickLens.abi, artifacts.TickLens.bytecode, owner)
   const tickLens = await TickLens.deploy()
@@ -189,21 +172,20 @@ async function main() {
   // await tryVerify(tickLens)
 
   const QuoterV2 = new ContractFactory(artifacts.QuoterV2.abi, artifacts.QuoterV2.bytecode, owner)
-  const quoterV2 = await QuoterV2.deploy(pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE)
+  const quoterV2 = await QuoterV2.deploy(sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE)
   console.log('QuoterV2', quoterV2.address)
 
-  // await tryVerify(quoterV2, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
+  // await tryVerify(quoterV2, [sectaDexPoolDeployer_address, sectaDexFactory_address, config.WNATIVE])
 
   const contracts = {
     SwapRouter: swapRouter.address,
-    V3Migrator: v3Migrator.address,
     QuoterV2: quoterV2.address,
     TickLens: tickLens.address,
     // NFTDescriptor: nftDescriptor.address,
     // NFTDescriptorEx: nftDescriptorEx.address,
     NonfungibleTokenPositionDescriptor: nonfungibleTokenPositionDescriptor.address,
     NonfungiblePositionManager: nonfungiblePositionManager.address,
-    PancakeInterfaceMulticall: pancakeInterfaceMulticall.address,
+    SectaInterfaceMulticall: sectaInterfaceMulticall.address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

@@ -2,10 +2,10 @@
 pragma solidity >=0.7.0;
 pragma abicoder v2;
 
-import '@pancakeswap/v3-core/contracts/interfaces/IPancakeV3Pool.sol';
-import '@pancakeswap/v3-core/contracts/libraries/TickMath.sol';
-import '@pancakeswap/v3-core/contracts/libraries/BitMath.sol';
-import '@pancakeswap/v3-core/contracts/libraries/FullMath.sol';
+import '@sectafi/v3-core/contracts/interfaces/ISectaDexPool.sol';
+import '@sectafi/v3-core/contracts/libraries/TickMath.sol';
+import '@sectafi/v3-core/contracts/libraries/BitMath.sol';
+import '@sectafi/v3-core/contracts/libraries/FullMath.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/math/SignedSafeMath.sol';
@@ -112,7 +112,7 @@ library NFTDescriptor {
         return
             string(
                 abi.encodePacked(
-                    'This NFT represents a liquidity position in a PancakeSwap V3 ',
+                    'This NFT represents a liquidity position in a SectaFi Dex ',
                     quoteTokenSymbol,
                     '-',
                     baseTokenSymbol,
@@ -160,7 +160,7 @@ library NFTDescriptor {
         return
             string(
                 abi.encodePacked(
-                    'Pancake - ',
+                    'Secta - ',
                     feeTier,
                     ' - ',
                     escapeQuotes(params.quoteTokenSymbol),

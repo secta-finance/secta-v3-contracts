@@ -2,8 +2,8 @@ pragma solidity =0.7.6;
 pragma abicoder v2;
 
 import '../../../../../contracts/test/TestERC20.sol';
-import '../../../../../contracts/PancakeV3Pool.sol';
-import '../../../../../contracts/PancakesV3Factory.sol';
+import '../../../../../contracts/SectaDexPool.sol';
+import '../../../../../contracts/SectasV3Factory.sol';
 
 contract SetupToken {
     TestERC20 public token;
@@ -54,7 +54,7 @@ contract SetupTokens {
 }
 
 contract SetupUniswap {
-    PancakeV3Pool public pool;
+    SectaDexPool public pool;
     TestERC20 token0;
     TestERC20 token1;
 
@@ -62,22 +62,22 @@ contract SetupUniswap {
     // fee 500   + tickSpacing 10
     // fee 3000  + tickSpacing 60
     // fee 10000 + tickSpacing 200
-    PancakesV3Factory factory;
+    SectasV3Factory factory;
 
     constructor(TestERC20 _token0, TestERC20 _token1) public {
-        factory = new PancakesV3Factory();
+        factory = new SectasV3Factory();
         token0 = _token0;
         token1 = _token1;
     }
 
     function createPool(uint24 _fee, uint160 _startPrice) public {
-        pool = PancakeV3Pool(factory.createPool(address(token0), address(token1), _fee));
+        pool = SectaDexPool(factory.createPool(address(token0), address(token1), _fee));
         pool.initialize(_startPrice);
     }
 }
 
 contract UniswapMinter {
-    PancakeV3Pool pool;
+    SectaDexPool pool;
     TestERC20 token0;
     TestERC20 token1;
 
@@ -94,11 +94,11 @@ contract UniswapMinter {
         token1 = _token1;
     }
 
-    function setPool(PancakeV3Pool _pool) public {
+    function setPool(SectaDexPool _pool) public {
         pool = _pool;
     }
 
-    function PancakeV3MintCallback(
+    function SectaDexMintCallback(
         uint256 amount0Owed,
         uint256 amount1Owed,
         bytes calldata data
@@ -149,7 +149,7 @@ contract UniswapMinter {
 }
 
 contract UniswapSwapper {
-    PancakeV3Pool pool;
+    SectaDexPool pool;
     TestERC20 token0;
     TestERC20 token1;
 
@@ -167,11 +167,11 @@ contract UniswapSwapper {
         token1 = _token1;
     }
 
-    function setPool(PancakeV3Pool _pool) public {
+    function setPool(SectaDexPool _pool) public {
         pool = _pool;
     }
 
-    function PancakeV3SwapCallback(
+    function SectaDexSwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata data

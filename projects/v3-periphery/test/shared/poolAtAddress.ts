@@ -1,7 +1,7 @@
-import { abi as POOL_ABI } from '@pancakeswap/v3-core/artifacts/contracts/PancakeV3Pool.sol/PancakeV3Pool.json'
+import { abi as POOL_ABI } from '@sectafi/v3-core/artifacts/contracts/SectaDexPool.sol/SectaDexPool.json'
 import { Contract, Wallet } from 'ethers'
-import { IPancakeV3Pool } from '../../typechain-types'
+import { ISectaDexPool } from '../../typechain-types'
 
-export default function poolAtAddress(address: string, wallet: Wallet): IPancakeV3Pool {
-  return new Contract(address, POOL_ABI, wallet) as IPancakeV3Pool
+export default function poolAtAddress(address: string, wallet: Wallet): ISectaDexPool {
+  return new Contract(address, POOL_ABI, wallet) as ISectaDexPool
 }

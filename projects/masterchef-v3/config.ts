@@ -14,6 +14,6 @@ export default {
   MASTER_CHEF_V2_PID: {
     mainnet: 0,
     testnet: 0,
-    goerli: 0,
+    sepolia: 0,
   },
 };

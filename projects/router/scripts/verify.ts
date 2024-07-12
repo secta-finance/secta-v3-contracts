@@ -1,6 +1,6 @@
-import { verifyContract } from '@pancakeswap/common/verify'
-import { sleep } from '@pancakeswap/common/sleep'
-import { configs } from '@pancakeswap/common/config'
+import { verifyContract } from '@sectafi/common/verify'
+import { sleep } from '@sectafi/common/sleep'
+import { configs } from '@sectafi/common/config'
 
 async function main() {
   const networkName = network.name
@@ -9,9 +9,11 @@ async function main() {
   if (!config) {
     throw new Error(`No config found for network ${networkName}`)
   }
-  const deployedContracts_v3_core = await import(`@pancakeswap/v3-core/deployments/${networkName}.json`)
-  const deployedContracts_v3_periphery = await import(`@pancakeswap/v3-periphery/deployments/${networkName}.json`)
-  const deployedContracts_smart_router = await import(`@pancakeswap/smart-router/deployments/${networkName}.json`)
+  const deployedContracts_v3_core = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
+  const deployedContracts_v3_periphery = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
+  const deployedContracts_smart_router = await import(`@sectafi/smart-router/deployments/${networkName}.json`)
+
+  const sectaFactory_address = '0x8Ad39bf99765E24012A28bEb0d444DE612903C43'
 
   // Verify SmartRouterHelper
   console.log('Verify SmartRouterHelper')
@@ -21,42 +23,26 @@ async function main() {
   // Verify swapRouter
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_smart_router.SmartRouter, [
-    config.v2Factory,
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    sectaFactory_address,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     deployedContracts_v3_periphery.NonfungiblePositionManager,
-    config.stableFactory,
-    config.stableInfo,
     config.WNATIVE,
   ])
   await sleep(10000)
 
   // Verify mixedRouteQuoterV1
   console.log('Verify mixedRouteQuoterV1')
-  await verifyContract(deployedContracts_smart_router.MixedRouteQuoterV1, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
-    config.v2Factory,
-    config.stableFactory,
-    config.WNATIVE,
-  ])
-  await sleep(10000)
-
-  // Verify quoterV2
-  console.log('Verify quoterV2')
-  await verifyContract(deployedContracts_smart_router.QuoterV2, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
-    config.WNATIVE,
-  ])
-  await sleep(10000)
-
-  // Verify tokenValidator
-  console.log('Verify tokenValidator')
-  await verifyContract(deployedContracts_smart_router.TokenValidator, [
-    config.v2Factory,
-    deployedContracts_v3_periphery.NonfungiblePositionManager,
-  ])
+  await verifyContract(
+    deployedContracts_smart_router.MixedRouteQuoterV1,
+    [
+      deployedContracts_v3_core.SectaDexPoolDeployer,
+      deployedContracts_v3_core.SectaDexFactory,
+      sectaFactory_address,
+      config.WNATIVE,
+    ],
+    { SmartRouterHelper: deployedContracts_smart_router.SmartRouterHelper }
+  )
   await sleep(10000)
 }
 

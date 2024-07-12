@@ -1,6 +1,6 @@
-import { verifyContract } from '@pancakeswap/common/verify'
-import { sleep } from '@pancakeswap/common/sleep'
-import { configs } from '@pancakeswap/common/config'
+import { verifyContract } from '@sectafi/common/verify'
+import { sleep } from '@sectafi/common/sleep'
+import { configs } from '@sectafi/common/config'
 
 async function main() {
   const networkName = network.name
@@ -9,14 +9,14 @@ async function main() {
   if (!config) {
     throw new Error(`No config found for network ${networkName}`)
   }
-  const deployedContracts_v3_core = await import(`@pancakeswap/v3-core/deployments/${networkName}.json`)
-  const deployedContracts_v3_periphery = await import(`@pancakeswap/v3-periphery/deployments/${networkName}.json`)
+  const deployedContracts_v3_core = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
+  const deployedContracts_v3_periphery = await import(`@sectafi/v3-periphery/deployments/${networkName}.json`)
 
   // Verify swapRouter
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_v3_periphery.SwapRouter, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
   ])
   await sleep(10000)
@@ -29,26 +29,16 @@ async function main() {
   // Verify NonfungiblePositionManager
   console.log('Verify NonfungiblePositionManager')
   await verifyContract(deployedContracts_v3_periphery.NonfungiblePositionManager, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
     deployedContracts_v3_periphery.NonfungibleTokenPositionDescriptor,
   ])
   await sleep(10000)
 
-  // Verify pancakeInterfaceMulticall
-  console.log('Verify pancakeInterfaceMulticall')
-  await verifyContract(deployedContracts_v3_periphery.PancakeInterfaceMulticall)
-  await sleep(10000)
-
-  // Verify v3Migrator
-  console.log('Verify v3Migrator')
-  await verifyContract(deployedContracts_v3_periphery.V3Migrator, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
-    config.WNATIVE,
-    deployedContracts_v3_periphery.NonfungiblePositionManager,
-  ])
+  // Verify sectaInterfaceMulticall
+  console.log('Verify sectaInterfaceMulticall')
+  await verifyContract(deployedContracts_v3_periphery.SectaInterfaceMulticall)
   await sleep(10000)
 
   // Verify tickLens
@@ -59,8 +49,8 @@ async function main() {
   // Verify QuoterV2
   console.log('Verify QuoterV2')
   await verifyContract(deployedContracts_v3_periphery.QuoterV2, [
-    deployedContracts_v3_core.PancakeV3PoolDeployer,
-    deployedContracts_v3_core.PancakeV3Factory,
+    deployedContracts_v3_core.SectaDexPoolDeployer,
+    deployedContracts_v3_core.SectaDexFactory,
     config.WNATIVE,
   ])
   await sleep(10000)

@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import { ethers, run, network } from "hardhat";
 import { Contract } from "ethers";
-import { configs } from "@pancakeswap/common/config";
-import { tryVerify } from "@pancakeswap/common/verify";
+import { configs } from "@sectafi/common/config";
+import { tryVerify } from "@sectafi/common/verify";
 import { writeFileSync } from "fs";
 
 const abi = [
@@ -80,7 +80,7 @@ const abi = [
   },
   {
     inputs: [],
-    name: "NotPancakeNFT",
+    name: "NotSectaNFT",
     type: "error",
   },
   {
@@ -110,7 +110,7 @@ const abi = [
       },
       {
         indexed: true,
-        internalType: "contract IPancakeV3Pool",
+        internalType: "contract ISectaDexPool",
         name: "v3Pool",
         type: "address",
       },
@@ -593,7 +593,7 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IPancakeV3Pool",
+        internalType: "contract ISectaDexPool",
         name: "_v3Pool",
         type: "address",
       },
@@ -1056,7 +1056,7 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IPancakeV3Pool",
+        internalType: "contract ISectaDexPool",
         name: "v3Pool",
         type: "address",
       },

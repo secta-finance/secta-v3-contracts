@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SectaDexFactory #createPool gas 1`] = `4729417`;
+
+exports[`SectaDexFactory factory bytecode size 1`] = `5151`;
+
+exports[`SectaDexFactory pool bytecode size 1`] = `22962`;

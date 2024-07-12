@@ -1,18 +1,18 @@
-import { verifyContract } from '@pancakeswap/common/verify'
-import { sleep } from '@pancakeswap/common/sleep'
+import { verifyContract } from '@sectafi/common/verify'
+import { sleep } from '@sectafi/common/sleep'
 
 async function main() {
   const networkName = network.name
-  const deployedContracts = await import(`@pancakeswap/v3-core/deployments/${networkName}.json`)
+  const deployedContracts = await import(`@sectafi/v3-core/deployments/${networkName}.json`)
 
-  // Verify PancakeV3PoolDeployer
-  console.log('Verify PancakeV3PoolDeployer')
-  await verifyContract(deployedContracts.PancakeV3PoolDeployer)
+  // Verify SectaDexPoolDeployer
+  console.log('Verify SectaDexPoolDeployer')
+  await verifyContract(deployedContracts.SectaDexPoolDeployer)
   await sleep(10000)
 
-  // Verify pancakeV3Factory
-  console.log('Verify pancakeV3Factory')
-  await verifyContract(deployedContracts.PancakeV3Factory, [deployedContracts.PancakeV3PoolDeployer])
+  // Verify sectaDexFactory
+  console.log('Verify sectaDexFactory')
+  await verifyContract(deployedContracts.SectaDexFactory, [deployedContracts.SectaDexPoolDeployer])
   await sleep(10000)
 }
 
